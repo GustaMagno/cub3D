@@ -1,0 +1,7 @@
+*Zone.Identifier
+build
+*.o
+a.out
+cub3D
+output
+minilibx-linux
