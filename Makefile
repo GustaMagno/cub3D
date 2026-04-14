@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+         #
+#    By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/13 19:46:45 by otlacerd          #+#    #+#              #
-#    Updated: 2026/04/14 20:46:22 by otlacerd         ###   ########.fr        #
+#    Updated: 2026/04/14 22:18:09 by gustoliv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,9 @@ INCLUDES = -I. -I./includes -I$(MLX_DIR)
 all: mlx $(NAME)
 
 SRCS = cub3D.c \
+	src/parsing/mlx_exec.c \
+	src/parsing/data_struct.c \
+	utils/ft_calloc.c \
 
 OBJS = $(patsubst %.c,$(BUILD_DIR)/%.o,$(SRCS))
 

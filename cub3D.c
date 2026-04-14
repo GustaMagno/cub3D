@@ -1,21 +1,16 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3D.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/13 19:52:17 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/14 20:47:30 by otlacerd         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "cub3D.h"
 
 int	main(int argc, char *argv[])
 {
-	t_all *all;
+	t_all	*all;
+	t_mlx	*mlx;
 
+	mlx = new_mlx(all);
+	if (!mlx)
+		return (1);
+	if (!mlx_exec(mlx))
+		return (1);
 	(void) argc;
 	(void) argv;
 	(void) all;

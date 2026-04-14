@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:53:26 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/13 20:01:00 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/14 23:09:17 by gustoliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,20 @@
 # include <errno.h>
 # include <math.h>
 # include <mlx.h>
+# include "exec.h"
+# include "defines.h"
 
 typedef struct s_all
 {
 	int a;
 }				t_all;
 
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+	size_t	tile_size;
+	t_all	*all;
+}				t_mlx;
 
 #endif
