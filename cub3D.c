@@ -6,7 +6,7 @@
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:52:17 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/13 19:58:36 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/14 20:47:30 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,7 @@ int	main(int argc, char *argv[])
 {
 	t_all *all;
 
-	
+	(void) argc;
+	(void) argv;
+	(void) all;
 }

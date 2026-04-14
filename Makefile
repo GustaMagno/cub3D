@@ -6,7 +6,7 @@
 #    By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/13 19:46:45 by otlacerd          #+#    #+#              #
-#    Updated: 2026/04/13 19:52:52 by otlacerd         ###   ########.fr        #
+#    Updated: 2026/04/14 20:46:22 by otlacerd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,10 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 BUILD_DIR = build
-MLX_DIR = minilibx-linux
+MLX_DIR = minilibx-linux/
 INCLUDES = -I. -I./includes -I$(MLX_DIR)
 
-all: $(NAME)
+all: mlx $(NAME)
 
 SRCS = cub3D.c \
 
@@ -39,8 +39,20 @@ clean:
 	$(RM) $(BUILD_DIR)
 
 fclean: clean
+	echo $(MLX_DIR)
 	$(RM) $(NAME)
+	$(RM) $(MLX_DIR)
+	$(RM) libmlx.a
+	$(RM) includes/mlx.h
 
 re: fclean all
+
+mlx:
+	@if [ ! -d "$(MLX_DIR)" ]; then \
+		git clone git@github.com:42paris/minilibx-linux.git $(MLX_DIR); \
+	fi
+	@$(MAKE) -C $(MLX_DIR)
+# 	@cp $(MLX_DIR)/libmlx.a
+	@cp $(MLX_DIR)/mlx.h ./includes
 
 .PHONY: all clean fclean re
