@@ -1,4 +1,3 @@
-#include "../cub3D.h"
 
 #ifndef DEFINES_H
 # define DEFINES_H

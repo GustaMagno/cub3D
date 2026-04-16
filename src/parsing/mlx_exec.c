@@ -11,23 +11,26 @@ t_mlx	*new_mlx(t_all *all)
 	mlx->all = all;
 }
 
-int	close_x(t_mlx *mlx)
+void	end_mlx(t_mlx *mlx)
 {
-	end_structs(mlx->all);
 	mlx_destroy_window(mlx->mlx, mlx->win);
 	mlx_destroy_display(mlx);
 	free(mlx);
+}
+
+int	close_x(t_mlx *mlx)
+{
+	//end_structs(mlx->all);
+	end_mlx(mlx);
 	exit (1);
 }
 
-int	key_handler(int keycode, t_mlx *mlx)
+int	key_handler(int keycode, void *mlx)
 {
 	if (keycode == ESC)
 	{
-		end_structs(mlx->all);
-		mlx_destroy_window(mlx->mlx, mlx->win);
-		mlx_destroy_display(mlx);
-		free(mlx);
+		end_mlx(mlx);
+		//end_structs(mlx->all);
 		exit (1);
 	}
 }

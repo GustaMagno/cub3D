@@ -3,7 +3,7 @@
 
 int	main(int argc, char *argv[])
 {
-	t_all	*all;
+	t_all	*all = NULL;
 	t_mlx	*mlx;
 
 	mlx = new_mlx(all);
