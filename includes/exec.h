@@ -1,11 +1,13 @@
 #ifndef EXEC_H
 # define EXEC_H
 
-typedef struct s_mlx t_mlx;
-typedef struct s_all t_all;
+#include "cub3D.h"
 
-void	*ft_calloc(size_t nmemb, size_t size);
-int		mlx_exec(t_mlx *mlx);
-t_mlx	*new_mlx(t_all *all);
+void			*ft_calloc(size_t nmemb, size_t size);
+int				mlx_exec(t_mlx *mlx);
+int				*mlx_assign(t_mlx *mlx, t_all *all);
+int				render_game(void *p);
+void			end_mlx(t_mlx *mlx);
+int				close_x(t_mlx *mlx);
 
 #endif

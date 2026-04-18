@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/13 19:46:45 by otlacerd          #+#    #+#              #
-#    Updated: 2026/04/16 16:00:10 by marvin           ###   ########.fr        #
+#    Updated: 2026/04/17 17:43:12 by gustoliv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
 CC = cc
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS = -O3 #-Wall -Wextra -Werror
 RM = rm -rf
 BUILD_DIR = build
 MLX_DIR = minilibx-linux/
@@ -22,7 +22,9 @@ INCLUDES = -I. -I./includes -I$(MLX_DIR)
 all: mlx $(NAME)
 
 SRCS = cub3D.c \
-	src/parsing/mlx_exec.c \
+	src/exec/mlx_exec.c \
+	src/exec/end_mlx.c \
+	src/exec/game_loop.c \
 	src/parsing/data_struct.c \
 	utils/ft_calloc.c \
 

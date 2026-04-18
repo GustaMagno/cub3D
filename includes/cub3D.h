@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:53:26 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/16 15:42:32 by marvin           ###   ########.fr       */
+/*   Updated: 2026/04/17 23:58:52 by gustoliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,46 @@
 # include <errno.h>
 # include <math.h>
 # include <mlx.h>
-# include "exec.h"
-# include "defines.h"
+
+# define ESC 65307
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define UP    65362
+# define DOWN  65364
+# define LEFT  65361
+# define RIGHT 65363
 
 typedef struct s_all
 {
 	int a;
 }				t_all;
 
+typedef struct s_img
+{
+	void	*img;
+	char	*adress;
+	int		width;
+	int		height;
+	int		bits_per_pixel;
+	
+}	t_img;
+
 typedef struct s_mlx
 {
 	void	*mlx;
 	void	*win;
-	size_t	tile_size;
+	int		k_w;
+	int		k_a;
+	int		k_s;
+	int		k_d;
+	double	x_test;
+	double	y_test;
+	char	**test_map;
+	t_img	*img;
+	t_img	*red_img;
+	t_img	*blue_img;
 	t_all	*all;
 }				t_mlx;
 
