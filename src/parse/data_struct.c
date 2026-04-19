@@ -46,7 +46,6 @@ int	get_map_grid(t_map *maps, t_config *conf)
 	beginning = get_grid_beginning(maps, conf);
 	if (beginning < 0)
 		end_program("Failed get_grid_beginning in get_map_grid", 1);
-	printf("beginning: %d\n", beginning);
 	maps->lines = array_string_length(maps->file + beginning);
 	if (maps->lines <= 0)
 		end_program("Wrong amount of lines in map_grid", 1);

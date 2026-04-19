@@ -6,7 +6,7 @@
 #    By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/13 19:46:45 by otlacerd          #+#    #+#              #
-#    Updated: 2026/04/19 10:11:01 by otlacerd         ###   ########.fr        #
+#    Updated: 2026/04/19 10:29:35 by otlacerd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -Rf $(BUILD_DIR)
 	@rm -Rf $(MLX_DIR)
 	@rm -Rf $(LIBFT_DIR)
 

@@ -6,7 +6,7 @@
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 04:55:03 by olacerda          #+#    #+#             */
-/*   Updated: 2026/04/19 10:00:51 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/19 10:33:59 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,35 +35,17 @@ char **get_config_pointer(char *string, t_config *config)
 	if (!string || !config)
 		return (NULL);
 	else if (string_compare(string, config->ref[NO], 0) == 0)
-	{
-		printf("1returning pointer of: %s\n", config->ref[NO]);
 		return (&(config->no));
-	}
 	else if (string_compare(string, config->ref[SO], 0) == 0)
-	{
-		printf("2returning pointer of: %s\n", config->ref[SO]);
 		return (&(config->so));
-	}
 	else if (string_compare(string, config->ref[WE], 0) == 0)
-	{
-		printf("3returning pointer of: %s\n", config->ref[WE]);
 		return (&(config->we));
-	}
 	else if (string_compare(string, config->ref[EA], 0) == 0)
-	{
-		printf("4returning pointer of: %s\n", config->ref[EA]);
 		return (&(config->ea));
-	}
 	else if (string_compare(string, config->ref[F], 0) == 0)
-	{
-		printf("5returning pointer of: %s\n", config->ref[F]);
 		return (&(config->f));
-	}
 	else if (string_compare(string, config->ref[C], 0) == 0)
-	{
-		printf("6returning pointer of: %s\n", config->ref[C]);
 		return (&(config->c));
-	}
 	return (NULL);
 }
 
