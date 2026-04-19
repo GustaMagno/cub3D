@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   string_basic.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/13 20:01:16 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/13 20:04:26 by otlacerd         ###   ########.fr       */
+/*   Created: 2026/04/14 22:23:35 by otlacerd          #+#    #+#             */
+/*   Updated: 2026/04/14 23:08:38 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "utils.h"
 
-#ifndef PARSING_H
-# define PARSING_H
+int	string_length(char *string)
+{
+	int	size;
 
-t_all	*init_structs();
-
-#endif
+	if (!string)
+		return (0);
+	size = 0;
+	while (string[size])
+		size++;
+	return (size);
+}
