@@ -6,7 +6,7 @@
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:53:26 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/19 08:17:16 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/19 11:19:47 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define MAPS_FOLDER "assets/maps/"
 # define MAP_TYPE ".cub"
 # define VALID_CHARACTERS "01NSEW"
+# define VALID_CHARACTERS_W_SPACE "01NSEW 	"
 
 # define DIR_NORTH "NO"
 # define DIR_SOUTH "SO"
