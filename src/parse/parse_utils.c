@@ -6,20 +6,23 @@
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 04:55:03 by olacerda          #+#    #+#             */
-/*   Updated: 2026/04/19 10:33:59 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/19 11:20:40 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-int	is_valid(char xar)
+int	is_valid(char xar, int w_spaces)
 {
 	char *valid;
 	int	index;
 
 	if (!xar)
 		return (0);
-	valid = VALID_CHARACTERS;
+	if (w_spaces == false)
+		valid = VALID_CHARACTERS;
+	else
+		valid = VALID_CHARACTERS_W_SPACE;
 	index = 0;
 	while (valid[index])
 	{
@@ -105,7 +108,7 @@ int	get_grid_beginning(t_map *maps, t_config *config)
 		w_spaces = 0;
 		while (is_white_space(maps->file[line][w_spaces]))
 			w_spaces++;
-		if (!is_config(maps->file[line] + w_spaces, config) && is_valid(maps->file[line][w_spaces]))
+		if (!is_config(maps->file[line] + w_spaces, config) && is_valid(maps->file[line][w_spaces], false))
 			return (line);
 		line++;
 	}
@@ -121,11 +124,11 @@ int	check_axis(char **map, int *line, int *column, int *axis)
 		(*column) = 0;
 		while (map[(*line)][(*column)])
 		{
-			if (is_valid(map[(*line)][(*column)]))
+			if (is_valid(map[(*line)][(*column)], false))
 			{
 				if ((map[(*line)][(*column)] != '1') &&  ++(*axis))
                     return (0);
-				while (map[(*line)] && is_valid(map[(*line)][(*column)]))
+				while (map[(*line)] && is_valid(map[(*line)][(*column)], false))
                     (*axis)++;
 				if ((--(*axis) >= 0) && map[(*line)][(*column)] != '1')
                     return (0);

@@ -6,7 +6,7 @@
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 22:17:51 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/19 09:03:38 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/19 11:23:37 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,34 @@ int	check_close_walls(char **map)
 	return (1);
 }
 
+int	check_characters(t_map *maps)
+{
+	int	player_count;
+	int	line;
+	int	column;
+
+	if (!maps)
+		return (0);
+	player_count = 0;
+	line = 0;
+	while (maps->map[++line])
+	{
+		column = -1;
+		while (maps->map[line][++column])
+		{
+			if (maps->map[line][column] == 'N' || maps->map[line][column] == 'S'
+				|| maps->map[line][column] == 'E' || maps->map[line][column] == 'W')
+				player_count++;
+			if (!is_valid(maps->map[line][column], true) || (player_count > 1))
+				return (0);
+		}
+	}
+	if (player_count < 1)
+		return (0);
+	printf("player count: %d\n", player_count);
+	return (1);
+}
+
 void	parse(t_all *all)
 {
 	if (all->argc != 2)
@@ -59,6 +87,8 @@ void	parse(t_all *all)
 	print_map(all->maps->map);
 	if (!check_close_walls(all->maps->map))
 		end_program("Map is not properly enclosed by walls '1'", 1);
+	if (!check_characters(all->maps))
+		end_program("Invalid set of characters in the map", 1);
 	printf("all->conf->no ==  %s\n", all->conf->no);
 	printf("all->conf->so ==  %s\n", all->conf->so);
 	printf("all->conf->we ==  %s\n", all->conf->we);
