@@ -15,6 +15,8 @@ Project start time: 13/04/2026 (Gustavo "14")
 Finish time: 12/05/2026 ~~ 15/05/2026
 
 
+1-Precisa parsear os elementos de config? (O avaliador pode alterar?) confirmar
+
 <!-- 0. Setup base ------------------------------------------------------------------
 
 Ler argumento .cub
