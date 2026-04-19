@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.c                                            :+:      :+:    :+:   */
+/*   is_something.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/13 19:52:17 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/19 07:22:47 by otlacerd         ###   ########.fr       */
+/*   Created: 2026/04/19 04:54:16 by otlacerd          #+#    #+#             */
+/*   Updated: 2026/04/19 04:54:25 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "utils.h"
 
-int	main(int argc, char *argv[])
+int	is_white_space(char xar)
 {
-	t_all *all;
-
-	all = NULL;
-	init_structs(&all);
-	fill_structs(all, argc, argv);
-	parse(all);
-	end_program(NULL, 0);
+	if (!xar)
+		return (0);
+	if ((xar >= 9 && xar <= 13) || xar == 32)
+		return (1);
 	return (0);
 }
+

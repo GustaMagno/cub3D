@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.c                                            :+:      :+:    :+:   */
+/*   allocation_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/13 19:52:17 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/19 07:22:47 by otlacerd         ###   ########.fr       */
+/*   Created: 2026/04/17 18:32:53 by otlacerd          #+#    #+#             */
+/*   Updated: 2026/04/17 19:33:35 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "utils.h"
 
-int	main(int argc, char *argv[])
+int	free_array_string(char **array_string, int size)
 {
-	t_all *all;
+	int	line;
 
-	all = NULL;
-	init_structs(&all);
-	fill_structs(all, argc, argv);
-	parse(all);
-	end_program(NULL, 0);
-	return (0);
+	if (!array_string)
+		return (0);
+	line = 0;
+	while (((size > 0) && (line <= size)) || array_string[line])
+	{
+		free(array_string[line]);
+		line++;
+	}
+	if (size == 0)
+		free(array_string[line]);
+	free(array_string);
+	return (1);
 }
