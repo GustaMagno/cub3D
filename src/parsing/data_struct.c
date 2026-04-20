@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:59:59 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/13 20:26:53 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/20 21:41:20 by gustoliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	end_structs(char *message, int status)
 		all = get_all_reference(NULL);
 	if (all)
 		free(all);
+
 	exit(status);
 }
 

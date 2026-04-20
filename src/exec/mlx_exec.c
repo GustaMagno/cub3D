@@ -21,7 +21,7 @@ int	key_handler(int keycode, void *mlx)
 		p->k_s = 1;
 	if (keycode == KEY_D)
 		p->k_d = 1;
-	return (0);
+	return (1);
 }
 
 int		key_release(int keycode, void *p)
@@ -58,7 +58,7 @@ t_img	*new_img(t_mlx *mlx, int width, int height)
 	return (img);
 }
 
-int	put_color(t_img *img, int color)
+void	put_color(t_img *img, int color)
 {
 	int	i;
 	int	t_pixeis;
@@ -92,9 +92,9 @@ int	mlx_exec(t_mlx *mlx)
 
 	error = 0;
 	mlx->test_map = (char *[]){"111111",
-							   "100001", 
-							   "100001", 
-							   "100001", 
+							   "101001", 
+							   "100101", 
+							   "110001", 
 							   "111111", NULL};
 	mlx->column_count = 6;
 	if (!create_images(mlx))
