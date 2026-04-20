@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   string_advanced.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olacerda <olacerda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 23:03:46 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/19 09:34:04 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/20 03:52:47 by olacerda         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "utils.h"
 
@@ -79,6 +79,28 @@ int	array_string_length(char **array)
 	while (array[size])
 		size++;
 	return (size);
+}
+
+int	string_trim(char *string)
+{
+	int	start;
+	int	end;
+	int	index;
+
+	if (!string)
+		return (0);
+	end = string_length(string);
+	while (is_white_space(string[--end]))
+		string[end] = '\0';
+	start = 0;
+	while (is_white_space(string[start]) == true)
+		start++;
+	index = 0;
+	while (string[start])
+		string[index++] = string[start++];
+	while (end > index)
+		string[end--] = '\0';
+	return (1);
 }
 
 // int	main(void)

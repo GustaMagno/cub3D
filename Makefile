@@ -1,14 +1,14 @@
-# **************************************************************************** #
+#******************************************************************************#
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+         #
+#    By: olacerda <olacerda@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/13 19:46:45 by otlacerd          #+#    #+#              #
-#    Updated: 2026/04/19 10:29:35 by otlacerd         ###   ########.fr        #
+#    Updated: 2026/04/20 06:04:03 by olacerda         ###   ########.fr        #
 #                                                                              #
-# **************************************************************************** #
+#******************************************************************************#
 
 NAME = cub3D
 
@@ -33,17 +33,20 @@ INCLUDES = -I. -I./includes -I$(MLX_DIR)
 all: $(NAME)
 
 SRCS = cub3D.c \
-		src/parse/data_struct.c \
+		src/parse/data_structure.c \
 		src/parse/parse.c \
 		src/parse/parse_utils.c \
-		src/general_utils/allocation_free.c \
-		src/general_utils/allocation.c \
-		src/general_utils/get_next_line.c \
-		src/general_utils/string_advanced.c \
-		src/general_utils/string_basic.c \
-		src/general_utils/print.c \
-		src/general_utils/data.c \
-		src/general_utils/is_something.c \
+		src/parse/map.c \
+		src/parse/map_utils.c \
+		src/utils/allocation_free.c \
+		src/utils/allocation.c \
+		src/utils/get_next_line.c \
+		src/utils/string_advanced.c \
+		src/utils/string_basic.c \
+		src/utils/print.c \
+		src/utils/data.c \
+		src/utils/clean_data.c \
+		src/utils/is_something.c \
 
 OBJS = $(patsubst %.c,$(BUILD_DIR)/%.o,$(SRCS))
 

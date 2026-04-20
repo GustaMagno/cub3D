@@ -6,13 +6,13 @@
 /*   By: olacerda <olacerda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:20:12 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/18 03:36:51 by olacerda         ###   ########.fr       */
+/*   Updated: 2026/04/20 05:43:00 by olacerda         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "utils.h"
 
-int	put_message(char *message, int fd, int break_line)
+int	print_message(char *message, int fd, int break_line)
 {
 	int	size;
 
@@ -27,7 +27,7 @@ int	put_message(char *message, int fd, int break_line)
 	return (1);
 }
 
-int	put_error(char *message)
+int	print_error(char *message)
 {
 	static char	*standard_error;
 	static int	error_size;
@@ -36,8 +36,7 @@ int	put_error(char *message)
 	if (!standard_error || !error_size)
 	{
 		standard_error = SUBJECT_ERROR;
-		while (standard_error[error_size])
-			error_size++;
+		error_size = string_length(standard_error);
 	}
 	if (!message)
 		return (0);
@@ -50,6 +49,31 @@ int	put_error(char *message)
 	return (1);
 }
 
+int	print_errors(char **messages)
+{
+	static char *standard_error;
+	static int	error_size;
+	int	size;
+	int	line;
+
+	if (!standard_error || !!error_size)
+	{
+		standard_error = SUBJECT_ERROR;
+		error_size = string_length(standard_error);
+	}
+	if (!messages)
+		return (0);
+	write(STDERR_FILENO, standard_error, error_size);
+	line = 0;
+	while (messages[line])
+	{
+		print_message(messages[line], STDERR_FILENO, false);
+		line++;
+	}
+	write(1, "\n", 1);
+	return (1);
+}
+
 int	print_map(char **map)
 {
 	int	line;
@@ -59,7 +83,7 @@ int	print_map(char **map)
 	line = 0;
 	while (map[line])
 	{
-		put_message(map[line], STDOUT_FILENO, true);
+		print_message(map[line], STDOUT_FILENO, true);
 		line++;
 	}
 	return (0);

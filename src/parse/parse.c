@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olacerda <olacerda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 22:17:51 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/19 11:23:37 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/20 05:59:29 by olacerda         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "parse.h"
 
@@ -69,12 +69,30 @@ int	check_characters(t_map *maps)
 	}
 	if (player_count < 1)
 		return (0);
-	printf("player count: %d\n", player_count);
 	return (1);
+}
+
+int	check_config_adresses(t_config *conf)
+{
+	int	line;
+
+	if (!conf)
+		return (0);
+	line = 0;
+	while (conf->ref[line])
+	{
+		if (!adress_is_valid(get_config_pointer(conf->ref[line], conf)))
+			return (0);		
+		line++;
+	}
 }
 
 void	parse(t_all *all)
 {
+	int	beginning;
+
+	if (!all)
+		end_program("Invalid pointer in function: parse", 1);
 	if (all->argc != 2)
 		end_program("Wrong argument count", 1);
 	if (!check_map_type(all->maps->name))
@@ -82,13 +100,17 @@ void	parse(t_all *all)
 	if (!create_map(all->maps))
 		end_program("Failed to create_map in parse", 1);
 	print_map(all->maps->file);
-	if (!get_map_grid(all->maps, all->conf))
-		end_program("Failed to get map_grip from file", 1);
+	beginning = 0;
+	if (!set_map_config(all->maps, all->conf, &beginning))
+		end_program("Failed to set map_config", 1);
+	if (!set_map_grid(all->maps, all->conf, beginning))
+		end_program("Failed to set map_grip from file", 1);
 	print_map(all->maps->map);
 	if (!check_close_walls(all->maps->map))
 		end_program("Map is not properly enclosed by walls '1'", 1);
 	if (!check_characters(all->maps))
 		end_program("Invalid set of characters in the map", 1);
+	
 	printf("all->conf->no ==  %s\n", all->conf->no);
 	printf("all->conf->so ==  %s\n", all->conf->so);
 	printf("all->conf->we ==  %s\n", all->conf->we);

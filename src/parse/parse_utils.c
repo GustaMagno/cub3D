@@ -1,16 +1,29 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olacerda <olacerda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 04:55:03 by olacerda          #+#    #+#             */
-/*   Updated: 2026/04/19 11:20:40 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/20 06:02:01 by olacerda         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "parse.h"
+
+int	adress_is_valid(char *adress)
+{
+	int fd;
+
+	if (!adress)
+		return (0);
+	fd = open(adress, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	close(fd);
+	return (1);
+}
 
 int	is_valid(char xar, int w_spaces)
 {
@@ -33,48 +46,6 @@ int	is_valid(char xar, int w_spaces)
 	return (0);
 }
 
-char **get_config_pointer(char *string, t_config *config)
-{
-	if (!string || !config)
-		return (NULL);
-	else if (string_compare(string, config->ref[NO], 0) == 0)
-		return (&(config->no));
-	else if (string_compare(string, config->ref[SO], 0) == 0)
-		return (&(config->so));
-	else if (string_compare(string, config->ref[WE], 0) == 0)
-		return (&(config->we));
-	else if (string_compare(string, config->ref[EA], 0) == 0)
-		return (&(config->ea));
-	else if (string_compare(string, config->ref[F], 0) == 0)
-		return (&(config->f));
-	else if (string_compare(string, config->ref[C], 0) == 0)
-		return (&(config->c));
-	return (NULL);
-}
-
-int	get_config_content(char *string, char *config_element, t_config *config)
-{
-	char **element;
-	int	index;
-
-	if (!string || !config_element || !config)
-		return (0);
-	index = 0;
-	while (*string == config_element[index++])
-		string++;
-	while (is_white_space(*string))
-		string++;
-	element = get_config_pointer(config_element, config);
-	(*element) = malloc((string_length(string) + 1) * sizeof(char));
-	if (!(*element))
-		end_program("Failed allocation in get_config_content", 1);
-	index = -1;
-	while (string[++index])
-		(*element)[index] = string[index];
-	(*element)[index] = '\0';
-	return (1);
-}
-
 int	is_config(char *string, t_config *conf)
 {
 	int	line;
@@ -86,33 +57,12 @@ int	is_config(char *string, t_config *conf)
 	{
 		if (string_compare(string, conf->ref[line], string_length(conf->ref[line])) == 0)
 		{
-			get_config_content(string, conf->ref[line], conf);
+			set_config_content(string, conf->ref[line], conf);
 			return (1);
 		}
 		line++;
 	}
 	return (0);
-}
-
-
-int	get_grid_beginning(t_map *maps, t_config *config)
-{
-	int		w_spaces;
-	int		line;
-
-	if (!maps)
-		end_program("Invalid pointer in get_map_grid", 1);
-	line = 0;
-	while (maps->file[line])
-	{
-		w_spaces = 0;
-		while (is_white_space(maps->file[line][w_spaces]))
-			w_spaces++;
-		if (!is_config(maps->file[line] + w_spaces, config) && is_valid(maps->file[line][w_spaces], false))
-			return (line);
-		line++;
-	}
-	return (FAIL);
 }
 
 //descondensar essa função em 2 mais simples. (repetir código, por legibilidade)

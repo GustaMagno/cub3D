@@ -16,7 +16,11 @@ Finish time: 12/05/2026 ~~ 15/05/2026
 
 
 1-Precisa parsear os elementos de config? (O avaliador pode alterar?) confirmar
-
+2-"maps->columns" fiz apenas "string_lenght"
+        mas pode ter whitespaces depois. Criar função dedicada.
+3-Fazer um "trim" do início e fim no FILE inteiro. (qualquer whitespace);
+4-Testar o get_next_line (tá sem static no buffer.... verificar se tá funcionando '_')
+5-Verificar se a compilação da mlx no makefile é permitida ()
 <!-- 0. Setup base ------------------------------------------------------------------
 
 Ler argumento .cub
@@ -28,21 +32,21 @@ Abrir ficheiro (error se falhar)
 Ler linha a linha (read / get_next_line)
 Guardar tudo (array de strings) -->
 
-2. Separação de secções --------------------------------------------------------
+<!-- 2. Separação de secções --------------------------------------------------------
 
 Ignorar linhas vazias iniciais
 Identificar:
 config (texturas + cores)
 mapa (última parte do ficheiro)
-Garantir: mapa é último bloco
+Garantir: mapa é último bloco -->
 
-3. Parsing dos identificadores (config)
+<!-- 3. Parsing dos identificadores (config)
 Para cada linha não-vazia antes do mapa:
 
 Identificar tipo:
 NO, SO, WE, EA
 F, C
-Extrair conteúdo
+Extrair conteúdo -->
 
 4. Validação dos identificadores -----------------------------------------------
 
