@@ -6,7 +6,7 @@ void	*conditional_img(t_mlx *mlx, char tale)
 		return (mlx->red_img->adress);
 	if (tale == '0')
 		return (mlx->blue_img->adress);
-	return (NULL);
+	return (mlx->blue_img->adress);
 }
 
 void	put_pixel(t_mlx *mlx, char *pixeis, int y, int x)
@@ -24,7 +24,7 @@ void	put_pixel(t_mlx *mlx, char *pixeis, int y, int x)
 		j = -1;
 		while (++j < 64)
 			((int *)mlx->screen_img->adress)[i_pixel++] = ((int *)pixeis)[j];
-		i_pixel += (line_pixeis - (line_pixeis / mlx->column_count));
+		i_pixel += (line_pixeis - (line_pixeis / mlx->all->maps->lines));
 		i++;
 	}
 
@@ -38,11 +38,11 @@ void	put_map_in_buffer(t_mlx *mlx)
 	int	x;
 
 	y = -1;
-	while (mlx->test_map[++y])
+	while (mlx->all->maps->map[++y])
 	{
 		x = -1;
-		while (mlx->test_map[y][++x])
-			put_pixel(mlx, conditional_img(mlx, mlx->test_map[y][x]), y, x);
+		while (mlx->all->maps->map[y][++x])
+			put_pixel(mlx, conditional_img(mlx, mlx->all->maps->map[y][x]), y, x);
 	}
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->screen_img->img, 0, 0);
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->screen_img->img, 50, 50);
 }

@@ -1,4 +1,5 @@
 #include "exec.h"
+#include "parse.h"
 
 void	free_img(t_img *img, t_mlx *mlx)
 {
@@ -25,7 +26,7 @@ void	end_mlx(t_mlx *mlx)
 
 int	close_x(t_mlx *mlx)
 {
-	//end_structs(mlx->all);
+	end_program(NULL, 0);
 	end_mlx(mlx);
 	exit (1);
 }

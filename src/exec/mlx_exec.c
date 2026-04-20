@@ -1,4 +1,5 @@
 #include "exec.h"
+#include "parse.h"
 
 int	key_handler(int keycode, void *mlx)
 {
@@ -10,7 +11,7 @@ int	key_handler(int keycode, void *mlx)
 	if (keycode == ESC)
 	{
 		end_mlx(mlx);
-		//end_structs(mlx->all);
+		end_program(NULL, 0);
 		exit (1);
 	}
 	if (keycode == KEY_W)
@@ -80,7 +81,7 @@ int	create_images(t_mlx *mlx)
 	mlx->red_img = new_img(mlx, 64, 64);
 	if (!mlx->red_img)
 		return (free(mlx->blue_img), 0);
-	mlx->screen_img = new_img(mlx, 6 * 64, 5 * 64);
+	mlx->screen_img = new_img(mlx, mlx->all->maps->lines * 64, mlx->all->maps->columns * 64);
 	if (!mlx->blue_img)
 		return (free(mlx->blue_img), free(mlx->red_img), 0);
 	return (1);
@@ -88,15 +89,6 @@ int	create_images(t_mlx *mlx)
 
 int	mlx_exec(t_mlx *mlx)
 {
-	int error;
-
-	error = 0;
-	mlx->test_map = (char *[]){"111111",
-							   "101001", 
-							   "100101", 
-							   "110001", 
-							   "111111", NULL};
-	mlx->column_count = 6;
 	if (!create_images(mlx))
 		return (0);
 	put_color(mlx->red_img, 0xFF0000);
