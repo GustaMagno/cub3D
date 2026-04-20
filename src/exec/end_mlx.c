@@ -7,7 +7,6 @@ void	end_mlx(t_mlx *mlx)
 		mlx_destroy_window(mlx->mlx, mlx->win);
 		mlx_destroy_display(mlx->mlx);
 		free(mlx->mlx);
-		free(mlx);
 	}
 }
 

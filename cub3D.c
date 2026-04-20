@@ -17,12 +17,12 @@ int	mlx_assign(t_mlx *mlx, t_all *all)
 
 int	main(int argc, char *argv[])
 {
-	t_all	*all = NULL;
-	static t_mlx	*mlx;
+	t_all			*all = NULL;
+	static t_mlx	mlx;
 
-	if (!mlx_assign(mlx, all))
+	if (!mlx_assign(&mlx, all))
 		return (1);
-	if (!mlx_exec(mlx))
+	if (!mlx_exec(&mlx))
 		return (1);
 	(void) argc;
 	(void) argv;

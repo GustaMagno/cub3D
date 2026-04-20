@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:53:26 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/17 23:58:52 by gustoliv         ###   ########.fr       */
+/*   Updated: 2026/04/19 19:22:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ typedef struct s_img
 	int		width;
 	int		height;
 	int		bits_per_pixel;
+	int		line_len;
+	int		endian;
 	
 }	t_img;
 
@@ -56,10 +58,11 @@ typedef struct s_mlx
 	int		k_a;
 	int		k_s;
 	int		k_d;
+	int		column_count;
 	double	x_test;
 	double	y_test;
 	char	**test_map;
-	t_img	*img;
+	t_img	*screen_img;
 	t_img	*red_img;
 	t_img	*blue_img;
 	t_all	*all;

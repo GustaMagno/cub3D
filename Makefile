@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/13 19:46:45 by otlacerd          #+#    #+#              #
-#    Updated: 2026/04/17 17:43:12 by gustoliv         ###   ########.fr        #
+#    Updated: 2026/04/20 16:56:12 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS = cub3D.c \
 	src/exec/mlx_exec.c \
 	src/exec/end_mlx.c \
 	src/exec/game_loop.c \
+	src/exec/create_map.c \
 	src/parsing/data_struct.c \
 	utils/ft_calloc.c \
 

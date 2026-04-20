@@ -8,6 +8,7 @@ int	render_game(void *p)
 	if (!p)
 		return (0);
 	mlx = (t_mlx *)p;
+	put_map_in_buffer(mlx);
 	if ((mlx->k_d - mlx->k_a) == 1)
 		mlx->x_test += 0.001;
 	if ((mlx->k_d - mlx->k_a) == -1)

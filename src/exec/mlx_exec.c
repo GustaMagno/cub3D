@@ -40,18 +40,22 @@ int		key_release(int keycode, void *p)
 	return (0);
 }
 
-int	create_img(t_mlx *mlx, t_img *img)
+t_img	*new_img(t_mlx *mlx, int width, int height)
 {
-	img->height = 64;
-	img->width = 64;
-	img->bits_per_pixel = 32;
+	t_img	*img;
+
+	img = ft_calloc(1, sizeof(t_img));
+	if (!img)
+		return (NULL);
+	img->height = height;
+	img->width = width;
 	img->img = mlx_new_image(mlx->mlx, img->width, img->height);
 	if (!img->img)
-		return (-1);
-	img->adress = mlx_new_image(mlx->mlx, img->width, img->height);
+		return (NULL);
+	img->adress = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_len, &img->endian);
 	if (!img->img)
-		return (-1);
-	return (0);
+		return (NULL);
+	return (img);
 }
 
 int	put_color(t_img *img, int color)
@@ -64,8 +68,22 @@ int	put_color(t_img *img, int color)
 	while (i < t_pixeis)
 	{
 		((int *)img->adress)[i] = color;
-		i += 4;
+		i++;
 	}
+}
+
+int	create_images(t_mlx *mlx)
+{
+	mlx->blue_img = new_img(mlx, 64, 64);
+	if (!mlx->blue_img)
+		return (0);
+	mlx->red_img = new_img(mlx, 64, 64);
+	if (!mlx->red_img)
+		return (free(mlx->blue_img), 0);
+	mlx->screen_img = new_img(mlx, 6 * 64, 5 * 64);
+	if (!mlx->blue_img)
+		return (free(mlx->blue_img), free(mlx->red_img), 0);
+	return (1);
 }
 
 int	mlx_exec(t_mlx *mlx)
@@ -78,9 +96,8 @@ int	mlx_exec(t_mlx *mlx)
 							   "100001", 
 							   "100001", 
 							   "111111", NULL};
-	error += create_img(mlx, mlx->blue_img);
-	error += create_img(mlx, mlx->red_img);
-	if (error < 0)
+	mlx->column_count = 6;
+	if (!create_images(mlx))
 		return (0);
 	put_color(mlx->red_img, 0xFF0000);
 	put_color(mlx->blue_img, 0x0000FF);
