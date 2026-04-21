@@ -129,10 +129,7 @@ int	set_map_config(t_map *maps, t_config *config, int *beginning)
 		if(!is_config(maps->file[line] + w_spaces, config))
 		{
 			if (count != config->count || !is_valid(maps->file[line][w_spaces], false))
-			{
-				printf("count: %d\n", count);
 				end_program("Wrong configuration in map file", 1);
-			}
 			return (*beginning = line, 1);
 		}
 		count++;
