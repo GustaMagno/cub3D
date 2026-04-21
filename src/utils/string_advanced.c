@@ -6,7 +6,7 @@
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 23:03:46 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/19 09:34:04 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/21 01:24:42 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,10 @@ int	string_cat(char *string1, char *string2)
 
 int	memory_zero(void *memory, t_ul size, t_ul type_size)
 {
-	char *string;
-	int	index;
-	int	limit;
+	char	*string;
+	t_ul	index;
+	t_ul	limit;
 
-	if (!memory)
-		return (0);
 	limit = size * type_size;
 	string = (char *)memory;
 	index = 0;
@@ -79,6 +77,28 @@ int	array_string_length(char **array)
 	while (array[size])
 		size++;
 	return (size);
+}
+
+int	string_trim(char *string)
+{
+	int	start;
+	int	end;
+	int	index;
+
+	if (!string)
+		return (0);
+	end = string_length(string);
+	while (is_white_space(string[--end]))
+		string[end] = '\0';
+	start = 0;
+	while (is_white_space(string[start]) == true)
+		start++;
+	index = 0;
+	while (string[start])
+		string[index++] = string[start++];
+	while (end > index)
+		string[end--] = '\0';
+	return (1);
 }
 
 // int	main(void)

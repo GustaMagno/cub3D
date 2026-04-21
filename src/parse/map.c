@@ -35,31 +35,23 @@ char *get_map_adress(char *map_name)
 	return (full_adress);
 }
 
-int	get_map_grid(t_map *maps, t_config *conf)
+int	set_map_grid(t_map *maps, t_config *conf, int beginning)
 {
 	int	line;
-	int	beginning;
-	int	size;
 
 	if (!maps || !conf)
 		return (0);
-	beginning = get_grid_beginning(maps, conf);
-	if (beginning < 0)
-		end_program("Failed get_grid_beginning in get_map_grid", 1);
 	maps->lines = array_string_length(maps->file + beginning);
-	if (maps->lines <= 0)
-		end_program("Wrong amount of lines in map_grid", 1);
+	maps->columns = get_grid_columns(maps, beginning);
+	if (maps->lines <= 0 || maps->columns <= 0)
+		end_program("Invalid map proportion", 1);
+	normalize_grid(maps, beginning);
 	maps->map = malloc((maps->lines + 1) * sizeof(char *));
 	if (!maps->map)
-		end_program("Failed allocation of map in get_map_grid", 1);
+		end_program("Failed allocation of map in set_map_grid", 1);
 	line = 0;
 	while (maps->file[beginning] && (line < (maps->lines + 1)))
-	{
-		size = string_length(maps->file[beginning]);
-		if (size > maps->columns)
-			maps->columns = size;
 		maps->map[line++] = maps->file[beginning++];
-	}
 	maps->map[line] = NULL;
 	return (1);
 }
@@ -73,8 +65,6 @@ int	create_map(t_map *maps)
 	if (!maps)
 		return (0);
 	maps->adress = get_map_adress(maps->name);
-	if (!maps->adress)
-		end_program("Invalid adress", 1);
 	size = get_file_lines(maps->adress);
 	fd = open(maps->adress, O_RDONLY);
 	if (fd < 0)
@@ -82,7 +72,7 @@ int	create_map(t_map *maps)
 	maps->file = malloc((size + 1) * sizeof(char *));
 	if (!maps->file)
 		return (end_program("Failed allocation in create_map", 1), 0);
-	memory_zero(maps->file, size + 1, sizeof(maps->file));
+	memory_zero(maps->file, size + 1, sizeof(*(maps->file)));
 	line = -1;
 	while (++line < size)
 	{
@@ -90,6 +80,7 @@ int	create_map(t_map *maps)
 		if (!maps->file[line])
 			break ;
 	}
+	trim_map_tail(maps->file);
 	return (close(fd), 1);
 }
 
@@ -116,4 +107,32 @@ int	get_file_lines(char *map_name)
 	}
 	close(fd);
 	return (count);
+}
+
+int	set_map_config(t_map *maps, t_config *config, int *beginning)
+{
+	int		w_spaces;
+	int		line;
+	int		count;
+
+	if (!maps)
+		end_program("Invalid pointer in set_map_grid", 1);
+	count = 0;
+	line = -1;
+	while (maps->file[++line])
+	{
+		w_spaces = 0;
+		while (is_white_space(maps->file[line][w_spaces]))
+			w_spaces++;
+		if (!maps->file[line][w_spaces])
+			continue;
+		if(!is_config(maps->file[line] + w_spaces, config))
+		{
+			if (count != config->count || !is_valid(maps->file[line][w_spaces], false))
+				end_program("Wrong configuration in map file", 1);
+			return (*beginning = line, 1);
+		}
+		count++;
+	}
+	return (0);
 }

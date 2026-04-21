@@ -41,7 +41,7 @@ char	*liner(char *line, t_gnl *x, int *all_end, char *buffer)
 char *get_next_line_no_breakline(int fd)
 {
 	static t_gnl	x[FD_SETSIZE];
-	char			(buff[BUFFER_SIZE + 1])[FD_SETSIZE];
+	static char		(buff[BUFFER_SIZE + 1])[FD_SETSIZE];
 	char 			*line;
 	int				all_end;
 
