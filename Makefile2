@@ -1,18 +1,17 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    Makefile2                                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/13 19:46:45 by otlacerd          #+#    #+#              #
-#    Updated: 2026/04/21 02:00:19 by otlacerd         ###   ########.fr        #
+#    Updated: 2026/04/21 01:55:53 by otlacerd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 ARG = map.cub
-
 CC = cc
 GCC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -22,7 +21,7 @@ VALGRIND = valgrind \
 			--track-fds=yes \
 			--show-leak-kinds=all \
 			--track-origins=yes \
-
+# 			--suppressions=readline.supp
 CHILDREN = --child-silent-after-fork=no \
 			--trace-children=yes
 RM = rm -rf
@@ -86,7 +85,10 @@ fclean: clean
 	@rm -Rf $(MLX_DIR)
 	@rm -Rf $(LIBFT_DIR)
 
-re: fclean mlx libft all
+re:
+	$(MAKE) fclean
+	$(MAKE) mlx
+	$(MAKE) libft
 
 val: $(NAME)
 	$(VALGRIND) ./$(NAME)
@@ -95,14 +97,23 @@ valchild: $(NAME)
 	$(VALGRIND) $(CHILDREN) ./$(NAME)
 
 val3:
-	$(MAKE) CC=$(GCC) CFLAGS="$(GFLAGS)" all
-	$(VALGRIND) ./$(NAME) $(ARG)
+	$(MAKE) CC=$(GCC) CFLAGS="$(GFLAGS)"
 
 re3:
-	$(MAKE) fclean
 	-$(MAKE) mlx
 	$(MAKE) libft
 	$(MAKE) CC=$(GCC) CFLAGS="$(GFLAGS)" all
 	$(VALGRIND) ./$(NAME) $(ARG)
+
+	re3:
+	$(MAKE) fclean
+	$(MAKE) CC=$(GCC) CFLAGS="$(GFLAGS)" all
+	$(VALGRIND) ./$(NAME)
+
+re3:
+	-$(MAKE) mlx
+	$(MAKE) libft
+	$(MAKE)
+	./$(NAME) $(ARG)
 
 .PHONY: all clean fclean re mlx externalre val valchild val3 re3

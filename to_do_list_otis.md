@@ -21,6 +21,7 @@ Finish time: 12/05/2026 ~~ 15/05/2026
 3-Fazer um "trim" do início e fim no FILE inteiro. (qualquer whitespace);
 4-Testar o get_next_line (tá sem static no buffer.... verificar se tá funcionando '_')
 5-Verificar se a compilação da mlx no makefile é permitida ()
+6-Concertar validacao do enclosed_walls. (paredes no meio)
 <!-- 0. Setup base ------------------------------------------------------------------
 
 Ler argumento .cub
@@ -50,18 +51,18 @@ Extrair conteúdo -->
 
 4. Validação dos identificadores -----------------------------------------------
 
-Cada identificador aparece exatamente 1 vez
-Nenhum identificador inválido
-Ordem livre (não assumir ordem)
+<!-- Cada identificador aparece exatamente 1 vez -->
+<!-- Nenhum identificador inválido -->
+<!-- Ordem livre (não assumir ordem) -->
 
-5. Parsing das texturas --------------------------------------------------------
+<!-- 5. Parsing das texturas --------------------------------------------------------
 Para cada NO SO WE EA:
 
 Extrair path
 Remover espaços extras
 Validar:
 path não vazio
-ficheiro existe (open)
+ficheiro existe (open) -->
 
 6. Parsing das cores -----------------------------------------------------------
 Para F e C:
@@ -73,38 +74,38 @@ exatamente 3 valores
 cada valor ∈ [0,255]
 apenas números
 
-7. Detecção do início do mapa --------------------------------------------------
+<!-- 7. Detecção do início do mapa --------------------------------------------------
 
 Primeira linha que:
 contém apenas 01NSEW
-A partir daí → tudo é mapa
+A partir daí → tudo é mapa -->
 
-8. Parsing do mapa (raw) -------------------------------------------------------
+<!-- 8. Parsing do mapa (raw) -------------------------------------------------------
 
 Guardar linhas como estão (incluindo espaços)
-Não trimar espaços internos
+Não trimar espaços internos -->
 
-9. Normalização do mapa --------------------------------------------------------
+<!-- 9. Normalização do mapa --------------------------------------------------------
 
 Encontrar largura máxima
-Padding com espaços (' ') nas linhas menores
+Padding com espaços (' ') nas linhas menores -->
 
-10. Validação de caracteres ----------------------------------------------------
+<!-- 10. Validação de caracteres ----------------------------------------------------
 
 Apenas:
 0 1 N S E W ' '
-Error se outro char
+Error se outro char -->
 
-11. Player ------------------------------------------------------------------
+<!-- 11. Player ------------------------------------------------------------------
 -----
 Encontrar N/S/E/W
 Validar:
 existe exatamente 1
 Guardar:
 posição (x,y)
-dire
+dire -->
 
-12. Mapa fechado ---------------------------------------------------------------
+<!-- 12. Mapa fechado ---------------------------------------------------------------
 
 Para cada 0 ou player:
 não pode tocar:
@@ -115,31 +116,31 @@ flood fill ou
 check vizinhos (4 direções)
 
 estrategia pra verificar "fechado por 1"
---> verificar por 'linha' depois por 'coluna'. Se o "começo" e o "fim" é '1'.
+ verificar por 'linha' depois por 'coluna'. Se o "começo" e o "fim" é '1'. -->
 
-13. Consistência geral ---------------------------------------------------------
+<!-- 13. Consistência geral --------------------------------------------------------- -->
 
-Todos os elementos obrigatórios existem:
-4 texturas
-2 cores
-mapa válido
-Nenhuma linha extra inválida antes do mapa
+<!-- Todos os elementos obrigatórios existem: -->
+<!-- 4 texturas -->
+<!-- 2 cores -->
+<!-- mapa válido -->
+<!-- Nenhuma linha extra inválida antes do mapa -->
 
-14. Gestão de erros ------------------------------------------------------------
+<!-- 14. Gestão de erros ------------------------------------------------------------
 
 Qualquer erro:
 Error\n
 mensagem clara
-Sem leaks
+Sem leaks -->
 
-15. Estruturas finais ----------------------------------------------------------
+<!-- 15. Estruturas finais ----------------------------------------------------------
 
 Struct config:
-paths texturas
+paths texturas -->
 cores
-Struct mapa:
+<!-- Struct mapa:
 grid normalizado
-player pos + direção
+player pos + direção -->
 
 16. Cleanup --------------------------------------------------------------------
 

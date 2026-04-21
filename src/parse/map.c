@@ -38,26 +38,21 @@ char *get_map_adress(char *map_name)
 int	set_map_grid(t_map *maps, t_config *conf, int beginning)
 {
 	int	line;
-	int	size;
 
 	if (!maps || !conf)
 		return (0);
 	maps->lines = array_string_length(maps->file + beginning);
-	if (maps->lines <= 0)
-		end_program("Wrong amount of lines in map_grid", 1);
+	maps->columns = get_grid_columns(maps, beginning);
+	if (maps->lines <= 0 || maps->columns <= 0)
+		end_program("Invalid map proportion", 1);
+	normalize_grid(maps, beginning);
 	maps->map = malloc((maps->lines + 1) * sizeof(char *));
 	if (!maps->map)
 		end_program("Failed allocation of map in set_map_grid", 1);
 	line = 0;
 	while (maps->file[beginning] && (line < (maps->lines + 1)))
-	{
-		size = string_length(maps->file[beginning]);
-		if (size > maps->columns)
-			maps->columns = size;
 		maps->map[line++] = maps->file[beginning++];
-	}
 	maps->map[line] = NULL;
-	normalize_grid(maps);
 	return (1);
 }
 
@@ -77,10 +72,9 @@ int	create_map(t_map *maps)
 	maps->file = malloc((size + 1) * sizeof(char *));
 	if (!maps->file)
 		return (end_program("Failed allocation in create_map", 1), 0);
-	memory_zero(maps->file, size + 1, sizeof(maps->file));
+	memory_zero(maps->file, size + 1, sizeof(*(maps->file)));
 	line = -1;
-	maps->file[line] = "dummy_string\n";
-	while (++line < size && maps->file[line])
+	while (++line < size)
 	{
 		maps->file[line] = get_next_line_no_breakline(fd);
 		if (!maps->file[line])
@@ -119,20 +113,29 @@ int	set_map_config(t_map *maps, t_config *config, int *beginning)
 {
 	int		w_spaces;
 	int		line;
+	int		count;
 
 	if (!maps)
 		end_program("Invalid pointer in set_map_grid", 1);
-	line = 0;
-	while (maps->file[line])
+	count = 0;
+	line = -1;
+	while (maps->file[++line])
 	{
 		w_spaces = 0;
 		while (is_white_space(maps->file[line][w_spaces]))
 			w_spaces++;
-		if (!is_config(maps->file[line] + w_spaces, config) && is_valid(maps->file[line][w_spaces], false))
+		if (!maps->file[line][w_spaces])
+			continue;
+		if(!is_config(maps->file[line] + w_spaces, config))
+		{
+			if (count != config->count || !is_valid(maps->file[line][w_spaces], false))
+			{
+				printf("count: %d\n", count);
+				end_program("Wrong configuration in map file", 1);
+			}
 			return (*beginning = line, 1);
-		line++;
+		}
+		count++;
 	}
-	if (!check_config_adresses(config))
-		end_program("Invalid adress in map configuration", 1);
-	return (-1);
+	return (0);
 }

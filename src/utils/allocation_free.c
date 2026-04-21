@@ -6,7 +6,7 @@
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 18:32:53 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/17 19:33:35 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/21 06:09:39 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int	free_array_string(char **array_string, int size)
 		free(array_string[line]);
 		line++;
 	}
-	if (size == 0)
-		free(array_string[line]);
 	free(array_string);
 	return (1);
 }

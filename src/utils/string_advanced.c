@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   string_advanced.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olacerda <olacerda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 23:03:46 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/20 03:52:47 by olacerda         ###   ########.fr       */
+/*   Updated: 2026/04/21 01:24:42 by otlacerd         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "utils.h"
 
@@ -52,12 +52,10 @@ int	string_cat(char *string1, char *string2)
 
 int	memory_zero(void *memory, t_ul size, t_ul type_size)
 {
-	char *string;
-	int	index;
-	int	limit;
+	char	*string;
+	t_ul	index;
+	t_ul	limit;
 
-	if (!memory)
-		return (0);
 	limit = size * type_size;
 	string = (char *)memory;
 	index = 0;

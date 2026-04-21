@@ -18,7 +18,7 @@
 void	parse(t_all *all); //Do the whole parse of the project
 int     check_map_type(char *map_name); //Verify if the map_file end with '.cub'
 int     check_close_walls(char **map); //Verify if the map is surrounded by '1'
-int		check_characters(t_map *maps);
+int		check_characters(t_map *maps, t_play *play);
 int     check_config_adresses(t_config *conf); //Verify
 
 //=====- parse_utils.c -========================================================
@@ -26,13 +26,15 @@ int     adress_is_valid(char *adress);
 int     is_valid(char xar, int w_spaces); //Check if 'xar' is allowed on the map. Set 'w_spaces' true to include white spaces.
 int		is_config(char *string, t_config *conf); // Verify if the 'string' argument is a configuration line of the chosen map file
 int     check_axis(char **map, int *line, int *column, int *axis);
+int		set_player_info(t_play *player, int line, int column, char **map);
 
 //=====- map_utils.c -==================================================
-int     normalize_grid(t_map *maps);
+int     normalize_grid(t_map *maps, int beginning);
 int		set_config_content(char *string, char *config_element, t_config *config);
 char	**get_config_pointer(char *string, t_config *config);
 int     trim_map_tail(char **map);
-int     switch_whitespaces_to_space(char *string, int size);
+int     fix_padding_n_whitespaces(char *string, int size, int column_size);
+int		get_grid_columns(t_map *maps, int beginning);
 
 //=====- map.c -=====================================================
 int		create_map(t_map *maps); //Converts the whole 'chosen_file' to a char **

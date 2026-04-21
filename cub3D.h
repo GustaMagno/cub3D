@@ -6,7 +6,7 @@
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:53:26 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/19 11:19:47 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/21 07:26:00 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 
 typedef unsigned long t_ul;
 
-typedef enum s_lconf
+typedef enum s_dir
 {
 	NO,
 	SO,
@@ -51,7 +51,7 @@ typedef enum s_lconf
 	F,
 	C,
 	END
-}			t_lconf;
+}			t_dir;
 
 typedef struct s_gnl
 {
@@ -59,6 +59,7 @@ typedef struct s_gnl
 	int		end;
 	int		readbytes;
 }				t_gnl;
+
 
 typedef	struct s_map
 {
@@ -70,6 +71,13 @@ typedef	struct s_map
 	int		columns;
 }				t_map;
 
+typedef struct s_play
+{
+	int		line;
+	int		column;
+	t_dir	direction;
+}				t_play;
+
 typedef struct s_config
 {
 	char *no;
@@ -79,12 +87,14 @@ typedef struct s_config
 	char *f;
 	char *c;
 	char *ref[7];
+	int	count;
 }				t_config;
 
 typedef struct s_all
 {
 	t_map		*maps;
 	t_config	*conf;
+	t_play		*play;
 	int			argc;
 	char		**argv;
 }				t_all;

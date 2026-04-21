@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olacerda <olacerda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 22:23:52 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/20 05:58:48 by olacerda         ###   ########.fr       */
+/*   Updated: 2026/04/21 07:02:43 by otlacerd         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
@@ -39,9 +39,10 @@ char	*liner(char *line, t_gnl *x, int *all_end, char *buffer); //Helper of get_n
 
 //=====- print.c -==============================================================
 int		print_message(char *message, int fd, int break_line); //Writes the string in the specific file descriptor. Send "break_line" to 'true' to end with '\n'
-int     print_errors(char **messages); //Writes multiple strings in the STDERR, then '\n'
+int		print_errors(char **messages, int line, int column, int coordinates); //Writes multiple strings in the STDERR, then '\n'
 int		print_error(char *message);//Writes the string in stderr, and writes '\n'
-int     print_map(char **map); // Print an array[string]'s "map";
+int		map_debugger(char **map, char *message); // !!!!!!!!!! DELETAR !!!!!!!!!!!!!1
+void	print_number(int number);
 
 //=====- clean_data.c -=========================================================
 void	end_program(char *error_message, int status);//Error is optional ~ NULL for std
@@ -50,5 +51,6 @@ int     clean_maps(t_map *maps);
 
 //=====- is_something.c -=======================================================
 int		is_white_space(char xar); //Check if the given character is an white_space
+int		is_alpha_numeric(char xar);
 
 #endif

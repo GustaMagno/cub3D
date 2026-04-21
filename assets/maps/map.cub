@@ -1,4 +1,9 @@
-SO ./testando 123
+NO ./assets/sprites/teste
+SO ./assets/sprites/teste
+WE ./assets/sprites/teste
+EA ./assets/sprites/teste
+F ./assets/sprites/teste
+C ./assets/sprites/teste
 
 1111111111111111
 1001111111110001

@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olacerda <olacerda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 04:55:03 by olacerda          #+#    #+#             */
-/*   Updated: 2026/04/20 06:02:01 by olacerda         ###   ########.fr       */
+/*   Updated: 2026/04/21 07:32:21 by otlacerd         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "parse.h"
 
@@ -65,7 +65,7 @@ int	is_config(char *string, t_config *conf)
 	return (0);
 }
 
-//descondensar essa função em 2 mais simples. (repetir código, por legibilidade)
+//descondensar essa função em 2 mais simples. (msmo que repeita código, por legibilidade)
 int	check_axis(char **map, int *line, int *column, int *axis)
 {
 	(*line) = -1;
@@ -76,14 +76,15 @@ int	check_axis(char **map, int *line, int *column, int *axis)
 		{
 			if (is_valid(map[(*line)][(*column)], false))
 			{
-				if ((map[(*line)][(*column)] != '1') &&  ++(*axis))
-                    return (0);
+				if (((map[(*line)][(*column)] != '1') &&  ++(*axis)) || !map[(*line)][(*column)])
+					return (0);
 				while (map[(*line)] && is_valid(map[(*line)][(*column)], false))
                     (*axis)++;
 				if ((--(*axis) >= 0) && map[(*line)][(*column)] != '1')
-                    return (0);
+					return (0);
 			}
-            (void)((axis == line) && ++(*axis));
+            if (((axis == line) && ++(*axis)) && (!map[(*line)] || !map[(*line)][(*column)]))
+				return (1);
             if ((axis == line) && map[(*line)] && map[(*line)][(*column)])
                 continue ;
             (void)((++(*column)) && (axis == line) && (*axis = 0));
@@ -91,5 +92,22 @@ int	check_axis(char **map, int *line, int *column, int *axis)
 		if (axis == line)
 			return (1);
 	}
+	return (1);
+}
+
+int	set_player_info(t_play *player, int line, int column, char **map)
+{
+	if (!player || !map)
+		return (0);
+	player->line = line;
+	player->column = column;
+	if (map[line][column] == 'N')
+		player->direction = NO;
+	if (map[line][column] == 'S')
+		player->direction = SO;
+	if (map[line][column] == 'E')
+		player->direction = EA;
+	if (map[line][column] == 'W')
+		player->direction = WE;
 	return (1);
 }

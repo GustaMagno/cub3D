@@ -1,32 +1,50 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olacerda <olacerda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 05:57:25 by olacerda          #+#    #+#             */
-/*   Updated: 2026/04/20 06:00:25 by olacerda         ###   ########.fr       */
+/*   Updated: 2026/04/21 05:58:37 by otlacerd         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "parse.h"
 
-int	normalize_grid(t_map *maps)
+int	get_grid_columns(t_map *maps, int beginning)
+{
+	int	size;
+	int	line;
+
+	if (!maps || !maps->file)
+		return (0);
+	line = beginning;
+	while (maps->file[line])
+	{
+		size = string_length(maps->file[line]);
+		if (size > maps->columns)
+			maps->columns = size;
+		line++;
+	}
+	return (1);
+}
+
+int	normalize_grid(t_map *maps, int beginning)
 {
 	int	size;
 	int	line;
 
 	if (!maps)
-		return (0);
-	line = 0;
-	while (maps->map[line])
+		return (0);	
+	line = beginning;
+	while (maps->file[line])
 	{
-		size = string_length(maps->map[line]);
+		size = string_length(maps->file[line]);
 		if (size < maps->columns)
 		{
-			maps->map[line] = re_allocker(maps->map[line], size, maps->columns, sizeof(*(maps->map[line])));
-			switch_whitespaces_to_space(maps->map[line], maps->columns);
+			maps->file[line] = re_allocker(maps->file[line], size, maps->columns + 1, sizeof(*(maps->file[line])));
+			fix_padding_n_whitespaces(maps->file[line], size, maps->columns);		
 		}
 		line++;
 	}
@@ -46,6 +64,8 @@ int	set_config_content(char *string, char *config_element, t_config *config)
 	while (is_white_space(*string))
 		string++;
 	element = get_config_pointer(config_element, config);
+	if (*element)
+		end_program("Repeated identifier in map configuration", 1);
 	(*element) = malloc((string_length(string) + 1) * sizeof(char));
 	if (!(*element))
 		end_program("Failed allocation in set_config_content", 1);
@@ -96,7 +116,7 @@ int	trim_map_tail(char **map)
 	return (1);
 }
 
-int	switch_whitespaces_to_space(char *string, int size)
+int	fix_padding_n_whitespaces(char *string, int size, int column_size)
 {
 	int	index;
 
@@ -109,5 +129,7 @@ int	switch_whitespaces_to_space(char *string, int size)
 			string[index] = ' ';
 		index++;
 	}
+	while (index < column_size)
+		string[index++] = ' ';
 	return (1);
 }

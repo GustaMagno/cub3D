@@ -1,16 +1,16 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   clean_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olacerda <olacerda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 10:43:25 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/20 01:50:50 by olacerda         ###   ########.fr       */
+/*   Updated: 2026/04/21 07:40:10 by otlacerd         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
-#include "utils.h"
+#include "parse.h"
 
 int	clean_config(t_config *config)
 {
@@ -61,6 +61,8 @@ void	end_program(char *error, int status)
 		clean_maps(all->maps);
 	if (all->conf)
 		clean_config(all->conf);
+	if (all->play)
+		free(all->play);
 	if (all)
 		free(all);
 	if (error != NULL)
