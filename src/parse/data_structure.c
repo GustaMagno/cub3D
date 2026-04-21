@@ -6,7 +6,7 @@
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 18:21:29 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/21 06:41:57 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/21 08:01:12 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,5 @@ int	fill_structs(t_all *all, int argc, char **argv)
 	if (argc > 1)
 		all->maps->name = string_duplicate(argv[1]);
 	fill_config(all->conf);
-	// all->maps->valid_chars = VALID_CHARACTERS;
 	return (1);
 }

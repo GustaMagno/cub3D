@@ -6,7 +6,7 @@
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:53:26 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/21 07:26:00 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/21 07:52:13 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,16 @@ typedef struct s_config
 	int	count;
 }				t_config;
 
+# define ESC 65307
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define UP    65362
+# define DOWN  65364
+# define LEFT  65361
+# define RIGHT 65363
+
 typedef struct s_all
 {
 	t_map		*maps;
@@ -99,5 +109,34 @@ typedef struct s_all
 	char		**argv;
 }				t_all;
 
+typedef struct s_img
+{
+	void	*img;
+	char	*adress;
+	int		width;
+	int		height;
+	int		bits_per_pixel;
+	int		line_len;
+	int		endian;
+	
+}	t_img;
+
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+	int		k_w;
+	int		k_a;
+	int		k_s;
+	int		k_d;
+	int		column_count;
+	double	x_test;
+	double	y_test;
+	char	**test_map;
+	t_img	*screen_img;
+	t_img	*red_img;
+	t_img	*blue_img;
+	t_all	*all;
+}				t_mlx;
 
 #endif

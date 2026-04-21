@@ -6,7 +6,7 @@
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 04:54:16 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/21 04:01:31 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/21 07:53:17 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,3 @@ int	is_alpha_numeric(char xar)
 		return (1);
 	return (0);
 }
-

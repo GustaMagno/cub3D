@@ -6,20 +6,38 @@
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:52:17 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/21 01:24:32 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/21 07:53:39 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
+int	mlx_assign(t_mlx *mlx, t_all *all)
+{
+	mlx->all = all;
+	mlx->mlx = mlx_init();
+	if (!mlx->mlx)
+		return (0);
+	mlx->win = mlx_new_window(mlx->mlx, 800, 800, "cube3D");
+	if (!mlx->win)
+        return (free(mlx->mlx), 0);
+	mlx->x_test = 100;
+	mlx->y_test = 0;
+	return (1);
+}
+
 int	main(int argc, char *argv[])
 {
-	t_all *all;
+	t_all			*all = NULL;
+	static t_mlx	mlx;
 
 	all = NULL;
 	init_structs(&all);
 	fill_structs(all, argc, argv);
 	parse(all);
+	if (!mlx_assign(&mlx, all))
+		return (1);
+	if (!mlx_exec(&mlx))
+		return (1);
 	end_program(NULL, 0);
-	return (0);
 }

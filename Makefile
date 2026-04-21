@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/04/13 19:46:45 by otlacerd          #+#    #+#              #
-#    Updated: 2026/04/21 02:00:19 by otlacerd         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = cub3D
 ARG = map.cub
 
@@ -23,8 +11,6 @@ VALGRIND = valgrind \
 			--show-leak-kinds=all \
 			--track-origins=yes \
 
-CHILDREN = --child-silent-after-fork=no \
-			--trace-children=yes
 RM = rm -rf
 BUILD_DIR = build
 MLX_DIR = external/mlx
@@ -47,6 +33,11 @@ SRCS = cub3D.c \
 		src/utils/print.c \
 		src/utils/clean_data.c \
 		src/utils/is_something.c \
+		src/exec/mlx_exec.c \
+		src/exec/end_mlx.c \
+		src/exec/game_loop.c \
+		src/exec/create_map.c \
+		src/utils/ft_calloc.c \
 
 OBJS = $(patsubst %.c,$(BUILD_DIR)/%.o,$(SRCS))
 
@@ -95,6 +86,7 @@ valchild: $(NAME)
 	$(VALGRIND) $(CHILDREN) ./$(NAME)
 
 val3:
+	$(MAKE) CC=$(GCC) CFLAGS="$(GFLAGS)"
 	$(MAKE) CC=$(GCC) CFLAGS="$(GFLAGS)" all
 	$(VALGRIND) ./$(NAME) $(ARG)
 
