@@ -6,7 +6,7 @@
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:53:26 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/21 07:52:13 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/21 08:30:11 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,15 @@ typedef struct s_config
 	int	count;
 }				t_config;
 
+typedef struct s_all
+{
+	t_map		*maps;
+	t_config	*conf;
+	t_play		*play;
+	int			argc;
+	char		**argv;
+}				t_all;
+
 # define ESC 65307
 # define KEY_W 119
 # define KEY_A 97
@@ -99,15 +108,6 @@ typedef struct s_config
 # define DOWN  65364
 # define LEFT  65361
 # define RIGHT 65363
-
-typedef struct s_all
-{
-	t_map		*maps;
-	t_config	*conf;
-	t_play		*play;
-	int			argc;
-	char		**argv;
-}				t_all;
 
 typedef struct s_img
 {

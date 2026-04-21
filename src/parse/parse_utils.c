@@ -6,7 +6,7 @@
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 04:55:03 by olacerda          #+#    #+#             */
-/*   Updated: 2026/04/21 07:32:21 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/21 08:56:40 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	is_config(char *string, t_config *conf)
 	return (0);
 }
 
-//descondensar essa função em 2 mais simples. (msmo que repeita código, por legibilidade)
 int	check_axis(char **map, int *line, int *column, int *axis)
 {
 	(*line) = -1;

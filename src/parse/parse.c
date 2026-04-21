@@ -6,7 +6,7 @@
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 22:17:51 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/21 07:36:04 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/21 08:57:04 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	check_characters(t_map *maps, t_play *play)
 		}
 	}
 	if (player_count < 1)
-		return (0);
+		end_program("Missing player in the map", 1);
 	return (1);
 }
 

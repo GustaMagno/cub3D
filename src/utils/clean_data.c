@@ -6,7 +6,7 @@
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 10:43:25 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/21 07:40:10 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/21 08:36:04 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	clean_maps(t_map *maps)
 		return (0);
 	if (maps->name)
 		free(maps->name);
-	if (maps->adress)
+	if (maps->adress && (maps->adress != maps->name))
 		free(maps->adress);
 	if (maps->map)
 		free(maps->map);

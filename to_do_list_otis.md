@@ -15,24 +15,13 @@ Project start time: 13/04/2026 (Gustavo "14")
 Finish time: 12/05/2026 ~~ 15/05/2026
 
 
+1-Precisa parsear os elementos de config? (O avaliador pode alterar?) confirmar
+2-"maps->columns" fiz apenas "string_lenght"
+        mas pode ter whitespaces depois. Criar função dedicada.
+3-Fazer um "trim" do início e fim no FILE inteiro. (qualquer whitespace);
+4-Testar o get_next_line (tá sem static no buffer.... verificar se tá funcionando '_')
 5-Verificar se a compilação da mlx no makefile é permitida ()
-
-6. Parsing das cores -----------------------------------------------------------
-Para F e C:
-
-Extrair string R,G,B
-Split por ,
-Validar:
-exatamente 3 valores
-cada valor ∈ [0,255]
-apenas números
-
-<!-- 1-Precisa parsear os elementos de config? (O avaliador pode alterar?) confirmar -->
-<!-- 2-"maps->columns" fiz apenas "string_lenght"
-        mas pode ter whitespaces depois. Criar função dedicada. -->
-<!-- 3-Fazer um "trim" do início e fim no FILE inteiro. (qualquer whitespace); -->
-<!-- 4-Testar o get_next_line (tá sem static no buffer.... verificar se tá funcionando '_') -->
-<!-- 6-Concertar validacao do enclosed_walls. (paredes no meio) -->
+6-Concertar validacao do enclosed_walls. (paredes no meio)
 <!-- 0. Setup base ------------------------------------------------------------------
 
 Ler argumento .cub
@@ -60,7 +49,7 @@ NO, SO, WE, EA
 F, C
 Extrair conteúdo -->
 
-<!-- 4. Validação dos identificadores ----------------------------------------------- -->
+4. Validação dos identificadores -----------------------------------------------
 
 <!-- Cada identificador aparece exatamente 1 vez -->
 <!-- Nenhum identificador inválido -->
@@ -75,7 +64,15 @@ Validar:
 path não vazio
 ficheiro existe (open) -->
 
+6. Parsing das cores -----------------------------------------------------------
+Para F e C:
 
+Extrair string R,G,B
+Split por ,
+Validar:
+exatamente 3 valores
+cada valor ∈ [0,255]
+apenas números
 
 <!-- 7. Detecção do início do mapa --------------------------------------------------
 
@@ -145,9 +142,9 @@ cores
 grid normalizado
 player pos + direção -->
 
-<!-- 16. Cleanup --------------------------------------------------------------------
+16. Cleanup --------------------------------------------------------------------
 
 Free de tudo
-Fechar fd -->
+Fechar fd
 
 17. Lembrar de Criar a "Regra bonus" no Makefile
