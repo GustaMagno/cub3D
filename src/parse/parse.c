@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 22:17:51 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/21 08:57:04 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/21 18:41:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,15 @@ int	check_characters(t_map *maps, t_play *play)
 	if (!maps)
 		return (0);
 	player_count = 0;
-	line = 0;
+	line = -1;
 	while (maps->map[++line])
 	{
 		column = -1;
 		while (maps->map[line][++column])
 		{
-			if (maps->map[line][column] == 'N' || maps->map[line][column] == 'S'
+			if ((maps->map[line][column] == 'N' || maps->map[line][column] == 'S'
 				|| maps->map[line][column] == 'E' || maps->map[line][column] == 'W')
+				&& player_count++)
 				set_player_info(play, line, column, maps->map);
 			if (!is_valid(maps->map[line][column], true) || (player_count > 1))
 				return (print_errors((char *[]){"Invalid character \"",
