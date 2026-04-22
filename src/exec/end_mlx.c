@@ -19,6 +19,7 @@ void	end_mlx(t_mlx *mlx)
 		free_img(mlx->red_img, mlx);
 		free_img(mlx->blue_img, mlx);
 		free_img(mlx->screen_img, mlx);
+		free_img(mlx->player_img, mlx);
 		mlx_destroy_display(mlx->mlx);
 		free(mlx->mlx);
 	}

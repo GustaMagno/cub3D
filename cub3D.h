@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:53:26 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/21 08:30:11 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/22 16:45:33 by gustoliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ typedef struct s_mlx
 	t_img	*screen_img;
 	t_img	*red_img;
 	t_img	*blue_img;
+	t_img	*player_img;
 	t_all	*all;
 }				t_mlx;
 
