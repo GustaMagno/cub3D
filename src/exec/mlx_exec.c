@@ -75,15 +75,18 @@ void	put_color(t_img *img, int color)
 
 int	create_images(t_mlx *mlx)
 {
+	mlx->player_img = new_img(mlx, 64, 64);
+	if (!mlx->player_img)
+		return (0);
 	mlx->blue_img = new_img(mlx, 64, 64);
 	if (!mlx->blue_img)
-		return (0);
+		return (free(mlx->player_img) ,0);
 	mlx->red_img = new_img(mlx, 64, 64);
 	if (!mlx->red_img)
-		return (free(mlx->blue_img), 0);
-	mlx->screen_img = new_img(mlx, mlx->all->maps->lines * 64, mlx->all->maps->columns * 64);
+		return (free(mlx->blue_img), free(mlx->player_img) ,0);
+	mlx->screen_img = new_img(mlx, 19 * 64, mlx->all->maps->lines * 64);
 	if (!mlx->blue_img)
-		return (free(mlx->blue_img), free(mlx->red_img), 0);
+		return (free(mlx->blue_img), free(mlx->red_img), free(mlx->player_img) ,0);
 	return (1);
 }
 
@@ -93,6 +96,7 @@ int	mlx_exec(t_mlx *mlx)
 		return (0);
 	put_color(mlx->red_img, 0xFF0000);
 	put_color(mlx->blue_img, 0x0000FF);
+	put_color(mlx->player_img, 0x00FF00);
 	mlx_hook(mlx->win, 2, 1L << 0, key_handler, mlx);
 	mlx_hook(mlx->win, 17, 0, close_x, mlx);
 	mlx_hook(mlx->win, 3, 1L << 1, key_release, mlx);

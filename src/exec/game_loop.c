@@ -8,16 +8,16 @@ int	render_game(void *p)
 	if (!p)
 		return (0);
 	mlx = (t_mlx *)p;
-	//put_map_in_buffer(mlx);
+	put_map_in_buffer(mlx);
 	if ((mlx->k_d - mlx->k_a) == 1)
-		mlx->x_test += 0.1;
+		mlx->x_test += 0.2;
 	if ((mlx->k_d - mlx->k_a) == -1)
-		mlx->x_test -= 0.1;
+		mlx->x_test -= 0.2;
 	if (mlx->k_w - mlx->k_s == 1)
-		mlx->y_test -= 0.1;
+		mlx->y_test -= 0.2;
 	if (mlx->k_w - mlx->k_s == -1)
-		mlx->y_test += 0.1;
+		mlx->y_test += 0.2;
 	// printf("PRESS X : %d, y : %d\n", (mlx->k_d - mlx->k_a), (mlx->k_w - mlx->k_s));
-	mlx_pixel_put(mlx->mlx, mlx->win, mlx->x_test - 90, mlx->y_test + 50, 0x00FF00);
+	mlx_pixel_put(mlx->mlx, mlx->win, mlx->x_test, mlx->y_test, 0x00FF00);
 	return (1);
 }
