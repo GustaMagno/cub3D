@@ -26,7 +26,7 @@ void	put_pixel(t_mlx *mlx, char *pixeis, int y, int x)
 		j = -1;
 		while (++j < 64)
 			((int *)mlx->screen_img->adress)[i_pixel++] = ((int *)pixeis)[j];
-		i_pixel += (line_pixeis - (line_pixeis / 19));
+		i_pixel += (line_pixeis - (line_pixeis / mlx->all->maps->columns));
 		i++;
 	}
 }

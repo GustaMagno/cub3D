@@ -84,7 +84,7 @@ int	create_images(t_mlx *mlx)
 	mlx->red_img = new_img(mlx, 64, 64);
 	if (!mlx->red_img)
 		return (free(mlx->blue_img), free(mlx->player_img) ,0);
-	mlx->screen_img = new_img(mlx, 19 * 64, mlx->all->maps->lines * 64);
+	mlx->screen_img = new_img(mlx, mlx->all->maps->columns * 64, mlx->all->maps->lines * 64);
 	if (!mlx->blue_img)
 		return (free(mlx->blue_img), free(mlx->red_img), free(mlx->player_img) ,0);
 	return (1);

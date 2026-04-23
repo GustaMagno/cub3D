@@ -7,7 +7,7 @@ int	mlx_assign(t_mlx *mlx, t_all *all)
 	mlx->mlx = mlx_init();
 	if (!mlx->mlx)
 		return (0);
-	mlx->win = mlx_new_window(mlx->mlx, 19 * 64, all->maps->lines * 64, "cube3D");
+	mlx->win = mlx_new_window(mlx->mlx, all->maps->columns * 64, all->maps->lines * 64, "cube3D");
 	if (!mlx->win)
         return (free(mlx->mlx), 0);
 	mlx->x_test = 10 * 64;
