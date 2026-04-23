@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   string_advanced.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olacerda <olacerda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 23:03:46 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/21 01:24:42 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/23 10:49:15 by olacerda         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "utils.h"
 
@@ -22,7 +22,7 @@ int	string_compare(char *string1, char *string2, int until)
 	while (string1[index] && string2[index]
 		&& (string1[index] == string2[index]))
 	{
-		if ((until > 0) && !(index < (until - 1)))
+		if (until > 0 && index >= (until - 1))
 			break ;
 		index++;
 	}
@@ -56,6 +56,8 @@ int	memory_zero(void *memory, t_ul size, t_ul type_size)
 	t_ul	index;
 	t_ul	limit;
 
+	if (!memory || size <= 0 || type_size <= 0)
+		return (0);
 	limit = size * type_size;
 	string = (char *)memory;
 	index = 0;
@@ -72,7 +74,7 @@ int	array_string_length(char **array)
 	int	size;
 
 	if (!array)
-		return (0);
+		end_program("Invalid pointer in array_string_length", 1);
 	size = 0;
 	while (array[size])
 		size++;

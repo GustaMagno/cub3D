@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: olacerda <olacerda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 22:17:51 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/21 18:41:20 by marvin           ###   ########.fr       */
+/*   Updated: 2026/04/23 11:00:19 by olacerda         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "parse.h"
 
@@ -61,13 +61,18 @@ int	check_characters(t_map *maps, t_play *play)
 		while (maps->map[line][++column])
 		{
 			if ((maps->map[line][column] == 'N' || maps->map[line][column] == 'S'
-				|| maps->map[line][column] == 'E' || maps->map[line][column] == 'W')
-				&& player_count++)
+				|| maps->map[line][column] == 'E' || maps->map[line][column] == 'W'))
+			{
+				player_count++;
 				set_player_info(play, line, column, maps->map);
+			}
 			if (!is_valid(maps->map[line][column], true) || (player_count > 1))
-				return (print_errors((char *[]){"Invalid character \"",
+			{
+				print_errors((char *[]){"Invalid character \"",
 					(char []){maps->map[line][column], '\0'}, "\" ", "in --> ", NULL},
-						line, column, true), 0);
+						line, column, true);
+				return (0);
+			}
 		}
 	}
 	if (player_count < 1)

@@ -42,17 +42,19 @@ int	set_map_grid(t_map *maps, t_config *conf, int beginning)
 	if (!maps || !conf)
 		return (0);
 	maps->lines = array_string_length(maps->file + beginning);
-	maps->columns = get_grid_columns(maps, beginning);
-	if (maps->lines <= 0 || maps->columns <= 0)
-		end_program("Invalid map proportion", 1);
+	maps->columns = get_grid_columns(maps->file, beginning);
 	normalize_grid(maps, beginning);
 	maps->map = malloc((maps->lines + 1) * sizeof(char *));
 	if (!maps->map)
 		end_program("Failed allocation of map in set_map_grid", 1);
+	memory_zero(maps->map, maps->lines + 1, sizeof(*maps->map));
 	line = 0;
 	while (maps->file[beginning] && (line < (maps->lines + 1)))
-		maps->map[line++] = maps->file[beginning++];
-	maps->map[line] = NULL;
+	{
+		maps->map[line] = maps->file[beginning];
+		line++;
+		beginning++;
+	}
 	return (1);
 }
 
@@ -81,7 +83,8 @@ int	create_map(t_map *maps)
 			break ;
 	}
 	trim_map_tail(maps->file);
-	return (close(fd), 1);
+	close(fd);
+	return (1);
 }
 
 int	get_file_lines(char *map_name)

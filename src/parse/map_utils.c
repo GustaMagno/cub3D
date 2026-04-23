@@ -1,33 +1,35 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olacerda <olacerda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 05:57:25 by olacerda          #+#    #+#             */
-/*   Updated: 2026/04/21 05:58:37 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/04/23 10:47:27 by olacerda         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "parse.h"
 
-int	get_grid_columns(t_map *maps, int beginning)
+int	get_grid_columns(char **map, int beginning)
 {
+	int	result;
 	int	size;
 	int	line;
 
-	if (!maps || !maps->file)
-		return (0);
+	if (!map)
+		end_program("Invalid pointer in get_grid_columns", 1);
 	line = beginning;
-	while (maps->file[line])
+	result = 0;
+	while (map[line])
 	{
-		size = string_length(maps->file[line]);
-		if (size > maps->columns)
-			maps->columns = size;
+		size = string_length(map[line]);
+		if (size > result)
+			result = size;
 		line++;
 	}
-	return (1);
+	return (result);
 }
 
 int	normalize_grid(t_map *maps, int beginning)
@@ -80,17 +82,17 @@ char **get_config_pointer(char *string, t_config *config)
 {
 	if (!string || !config)
 		return (NULL);
-	else if (string_compare(string, config->ref[NO], 0) == 0)
+	if (string_compare(string, config->ref[NO], 0) == 0)
 		return (&(config->no));
-	else if (string_compare(string, config->ref[SO], 0) == 0)
+	if (string_compare(string, config->ref[SO], 0) == 0)
 		return (&(config->so));
-	else if (string_compare(string, config->ref[WE], 0) == 0)
+	if (string_compare(string, config->ref[WE], 0) == 0)
 		return (&(config->we));
-	else if (string_compare(string, config->ref[EA], 0) == 0)
+	if (string_compare(string, config->ref[EA], 0) == 0)
 		return (&(config->ea));
-	else if (string_compare(string, config->ref[F], 0) == 0)
+	if (string_compare(string, config->ref[F], 0) == 0)
 		return (&(config->f));
-	else if (string_compare(string, config->ref[C], 0) == 0)
+	if (string_compare(string, config->ref[C], 0) == 0)
 		return (&(config->c));
 	return (NULL);
 }

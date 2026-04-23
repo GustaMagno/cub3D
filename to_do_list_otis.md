@@ -15,13 +15,15 @@ Project start time: 13/04/2026 (Gustavo "14")
 Finish time: 12/05/2026 ~~ 15/05/2026
 
 
-1-Precisa parsear os elementos de config? (O avaliador pode alterar?) confirmar
-2-"maps->columns" fiz apenas "string_lenght"
-        mas pode ter whitespaces depois. Criar função dedicada.
-3-Fazer um "trim" do início e fim no FILE inteiro. (qualquer whitespace);
-4-Testar o get_next_line (tá sem static no buffer.... verificar se tá funcionando '_')
-5-Verificar se a compilação da mlx no makefile é permitida ()
-6-Concertar validacao do enclosed_walls. (paredes no meio)
+1-Verificar edge-case em "config" (adicionar letras extra: SO123 ./assets/sprites/teste)
+
+<!-- 1-Precisa parsear os elementos de config? (O avaliador pode alterar?) confirmar -->
+<!-- 2-"maps->columns" fiz apenas "string_lenght"
+        mas pode ter whitespaces depois. Criar função dedicada. -->
+<!-- 3-Fazer um "trim" do início e fim no FILE inteiro. (qualquer whitespace); -->
+<!-- 4-Testar o get_next_line (tá sem static no buffer.... verificar se tá funcionando '_') -->
+<!-- 5-Verificar se a compilação da mlx no makefile é permitida () -->
+<!-- 6-Concertar validacao do enclosed_walls. (paredes no meio) -->
 <!-- 0. Setup base ------------------------------------------------------------------
 
 Ler argumento .cub
