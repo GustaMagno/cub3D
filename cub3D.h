@@ -116,10 +116,12 @@ typedef struct s_mlx
 	int		k_a;
 	int		k_s;
 	int		k_d;
-	int		column_count;
 	double	x_test;
 	double	y_test;
-	char	**test_map;
+	double	dirX;
+	double	dirY;
+	double	planeX;
+	double	planeY;
 	t_img	*screen_img;
 	t_img	*red_img;
 	t_img	*blue_img;

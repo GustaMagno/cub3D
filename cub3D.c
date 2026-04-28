@@ -1,6 +1,30 @@
 #include "exec.h"
 #include "parse.h"
 
+int	dir_assign(t_mlx *mlx, t_all *all)
+{
+	if (all->play->direction == NO)
+	{
+		mlx->dirY = -1;
+		mlx->planeX = 0.66;
+	}
+	if (all->play->direction == SO)
+	{
+		mlx->dirY = 1;
+		mlx->planeX = -0.66;
+	}
+	if (all->play->direction == EA)
+	{
+		mlx->dirX = 1;
+		mlx->planeY = 0.66;
+	}
+	if (all->play->direction == WE)
+	{
+		mlx->dirX = -1;
+		mlx->planeY = -0.66;
+	}
+}
+
 int	mlx_assign(t_mlx *mlx, t_all *all)
 {
 	mlx->all = all;
@@ -12,6 +36,7 @@ int	mlx_assign(t_mlx *mlx, t_all *all)
         return (free(mlx->mlx), 0);
 	mlx->x_test = 10 * 64;
 	mlx->y_test = 2 * 64;
+	dir_assign(mlx, all);
 	return (1);
 }
 

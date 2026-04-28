@@ -17,7 +17,5 @@ int	render_game(void *p)
 		mlx->y_test -= 0.2;
 	if (mlx->k_w - mlx->k_s == -1)
 		mlx->y_test += 0.2;
-	// printf("PRESS X : %d, y : %d\n", (mlx->k_d - mlx->k_a), (mlx->k_w - mlx->k_s));
-	mlx_pixel_put(mlx->mlx, mlx->win, mlx->x_test, mlx->y_test, 0x00FF00);
 	return (1);
 }

@@ -6,7 +6,7 @@ void	*conditional_img(t_mlx *mlx, char tale)
 		return (mlx->red_img->adress);
 	if (tale == '0')
 		return (mlx->blue_img->adress);
-	if (tale == 'N')
+	if (tale == 'N' || tale == 'S' || tale == 'E' || tale == 'W')
 		return (mlx->blue_img->adress);
 	return (mlx->blue_img->adress);
 }
@@ -31,17 +31,37 @@ void	put_pixel(t_mlx *mlx, char *pixeis, int y, int x)
 	}
 }
 
+// void	put_map_in_buffer(t_mlx *mlx)
+// {
+// 	int	y;
+// 	int	x;
+
+// 	y = -1;
+// 	while (mlx->all->maps->map[++y])
+// 	{
+// 		x = -1;
+// 		while (mlx->all->maps->map[y][++x])
+// 			put_pixel(mlx, conditional_img(mlx, mlx->all->maps->map[y][x]), y * 64, x * 64);
+// 	}
+// 	put_pixel(mlx, mlx->player_img->adress, mlx->y_test, mlx->x_test);
+// 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->screen_img->img, 0, 0);
+// }
+
 void	put_map_in_buffer(t_mlx *mlx)
 {
-	int	y;
-	int	x;
+	int		x;
+	int		screenW;
+	double	cameraX;
+	double	rayDirY;
+	double	rayDirX;
 
-	y = -1;
-	while (mlx->all->maps->map[++y])
+	x = -1;
+	screenW = mlx->all->maps->columns * 64;
+	while (++x < screenW)
 	{
-		x = -1;
-		while (mlx->all->maps->map[y][++x])
-			put_pixel(mlx, conditional_img(mlx, mlx->all->maps->map[y][x]), y * 64, x * 64);
+		cameraX = 2 * x / screenW - 1;
+		rayDirX = mlx->dirX + mlx->planeX * cameraX;
+		rayDirY = mlx->dirY + mlx->planeY * cameraX;
 	}
 	put_pixel(mlx, mlx->player_img->adress, mlx->y_test, mlx->x_test);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->screen_img->img, 0, 0);
