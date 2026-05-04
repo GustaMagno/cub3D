@@ -47,6 +47,30 @@ void	put_pixel(t_mlx *mlx, char *pixeis, int y, int x)
 // 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->screen_img->img, 0, 0);
 // }
 
+void	dda_ray(t_mlx *mlx, int rayDirX, int rayDirY)
+{
+	int	player_x;
+	int	player_y;
+	int	dist_x;
+	int	dist_y;
+
+	player_x = (int)mlx->x_test;
+	player_y = (int)mlx->y_test;
+	while (mlx->all->maps->map[player_x][player_y] != '1')
+	{
+		dist_x = 0;
+		dist_y = 0;
+		while (mlx->all->maps->map[player_x + dist_x][player_y] != '1')
+			dist_x++;
+		while (mlx->all->maps->map[player_x][player_y + dist_y] != '1')
+			dist_y++;
+		if (dist_x < dist_y)
+			player_x++;
+		else
+			player_y++;
+	}
+}
+
 void	put_map_in_buffer(t_mlx *mlx)
 {
 	int		x;
@@ -62,6 +86,7 @@ void	put_map_in_buffer(t_mlx *mlx)
 		cameraX = 2 * x / screenW - 1;
 		rayDirX = mlx->dirX + mlx->planeX * cameraX;
 		rayDirY = mlx->dirY + mlx->planeY * cameraX;
+		dda_ray(mlx, rayDirX, rayDirY);
 	}
 	put_pixel(mlx, mlx->player_img->adress, mlx->y_test, mlx->x_test);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->screen_img->img, 0, 0);
