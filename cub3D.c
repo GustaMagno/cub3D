@@ -1,27 +1,27 @@
 #include "exec.h"
 #include "parse.h"
 
-int	dir_assign(t_mlx *mlx, t_all *all)
+void	dir_assign(t_mlx *mlx, t_all *all)
 {
 	if (all->play->direction == NO)
 	{
-		mlx->dirY = -1;
-		mlx->planeX = 0.66;
+		mlx->ray->dirY = -1;
+		mlx->ray->planeX = 0.66;
 	}
 	if (all->play->direction == SO)
 	{
-		mlx->dirY = 1;
-		mlx->planeX = -0.66;
+		mlx->ray->dirY = 1;
+		mlx->ray->planeX = -0.66;
 	}
 	if (all->play->direction == EA)
 	{
-		mlx->dirX = 1;
-		mlx->planeY = 0.66;
+		mlx->ray->dirX = 1;
+		mlx->ray->planeY = 0.66;
 	}
 	if (all->play->direction == WE)
 	{
-		mlx->dirX = -1;
-		mlx->planeY = -0.66;
+		mlx->ray->dirX = -1;
+		mlx->ray->planeY = -0.66;
 	}
 }
 
@@ -36,6 +36,9 @@ int	mlx_assign(t_mlx *mlx, t_all *all)
         return (free(mlx->mlx), 0);
 	mlx->x_test = 10 * 64;
 	mlx->y_test = 2 * 64;
+	mlx->ray = ft_calloc(1, sizeof(t_ray));
+	if (!mlx->ray)
+        return (free(mlx->mlx), free(mlx->win), 0);
 	dir_assign(mlx, all);
 	return (1);
 }

@@ -108,6 +108,24 @@ typedef struct s_img
 	
 }	t_img;
 
+typedef struct s_ray
+{
+	double	wall_dist;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	dirX;
+	double	dirY;
+	double	planeX;
+	double	planeY;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		side;
+}	t_ray;
+
 typedef struct s_mlx
 {
 	void	*mlx;
@@ -118,14 +136,11 @@ typedef struct s_mlx
 	int		k_d;
 	double	x_test;
 	double	y_test;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
 	t_img	*screen_img;
 	t_img	*red_img;
 	t_img	*blue_img;
 	t_img	*player_img;
+	t_ray	*ray;
 	t_all	*all;
 }				t_mlx;
 
