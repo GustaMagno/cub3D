@@ -52,7 +52,7 @@ void	put_pixel(t_mlx *mlx, int x, int y, unsigned int color)
 	char	*adress;
 
 	adress = mlx->screen_img->adress + (y * mlx->screen_img->line_len
-		+ x * (mlx->screen_img->bits_per_pixel / 8))
+		+ x * (mlx->screen_img->bits_per_pixel / 8));
 	*(unsigned int *)adress = color;
 }
 
@@ -73,13 +73,13 @@ void	put_wall(t_mlx *mlx, int x, int wall_color)
 		draw_start = 0;
 	if (draw_end >= screen_h)
 		draw_end = screen_h - 1;
-	wall_color = (0xAA0000 * mlx->ray->side) + (0xFF0000 * (mlx->ray->side == 0))
+	wall_color = (0xAA0000 * mlx->ray->side) + (0xFF0000 * (mlx->ray->side == 0));
 	while (++y < screen_h)
 	{
 		if (y < draw_start)
 			put_pixel(mlx, x, y, 0x87CEEB);
 		else if (y <= draw_end)
-			put_pixel(mlx, x, y, wall_color):
+			put_pixel(mlx, x, y, wall_color);
 		else
 			put_pixel(mlx, x, y, 0x4A3728);
 	}
@@ -155,6 +155,6 @@ void	put_map_in_buffer(t_mlx *mlx)
 		dda_ray(mlx, mlx->ray, rayDirX, rayDirY);
 		put_wall(mlx, x, 0xFF0000);
 	}
-	put_pixel(mlx, mlx->player_img->adress, mlx->y_test, mlx->x_test);
+	// put_pixel(mlx, mlx->player_img->adress, mlx->y_test, mlx->x_test);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->screen_img->img, 0, 0);
 }
