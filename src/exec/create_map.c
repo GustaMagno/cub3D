@@ -73,7 +73,11 @@ void	put_wall(t_mlx *mlx, int x, int wall_color)
 		draw_start = 0;
 	if (draw_end >= screen_h)
 		draw_end = screen_h - 1;
+<<<<<<< HEAD
 	wall_color = (0x8B8B8B * mlx->ray->side) + (0x5A5A5A * (mlx->ray->side == 0));
+=======
+	wall_color = (0xAA0000 * mlx->ray->side) + (0xFF0000 * (mlx->ray->side == 0));
+>>>>>>> 827d55efe7785f3fc8d734b175ebaf1868a65c9c
 	while (++y < screen_h)
 	{
 		if (y < draw_start)
@@ -160,6 +164,6 @@ void	put_map_in_buffer(t_mlx *mlx)
 		dda_ray(mlx, mlx->ray, rayDirX, rayDirY);
 		put_wall(mlx, x, 0xFF0000);
 	}
-	//put_pixel(mlx, mlx->player_img->adress, mlx->y_test, mlx->x_test);
+	// put_pixel(mlx, mlx->player_img->adress, mlx->y_test, mlx->x_test);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->screen_img->img, 0, 0);
 }
