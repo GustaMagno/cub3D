@@ -37,6 +37,7 @@ int	mlx_assign(t_mlx *mlx, t_all *all)
 	mlx->x_test = (mlx->all->play->column * 64) + 32;
 	mlx->y_test = (mlx->all->play->line * 64) + 32;
 	mlx->ray = ft_calloc(1, sizeof(t_ray));
+	
 	if (!mlx->ray)
         return (free(mlx->mlx), free(mlx->win), 0);
 	dir_assign(mlx, all);
@@ -50,7 +51,7 @@ int	main(int argc, char *argv[])
 
 	all = NULL;
 	init_structs(&all);
-	fill_structs(all, argc, argv);
+	fill_structs(all, argc, argv, &mlx);
 	parse(all);
 	if (!mlx_assign(&mlx, all))
 		return (1);
