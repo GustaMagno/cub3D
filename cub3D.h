@@ -28,6 +28,9 @@
 # define TEX_FLOOR "F"
 # define TEX_CEIL  "C"
 
+# define WIDTH 64
+# define HEIGHT 64
+
 typedef unsigned long t_ul;
 
 typedef enum s_dir
@@ -77,13 +80,15 @@ typedef struct s_config
 	int	count;
 }				t_config;
 
+
 typedef struct s_all
 {
-	t_map		*maps;
-	t_config	*conf;
-	t_play		*play;
-	int			argc;
-	char		**argv;
+	t_map				*maps;
+	t_config			*conf;
+	t_play				*play;
+	int					argc;
+	char				**argv;
+	struct s_mlx		*mlx;
 }				t_all;
 
 # define ESC 65307
@@ -140,6 +145,10 @@ typedef struct s_mlx
 	t_img	*red_img;
 	t_img	*blue_img;
 	t_img	*player_img;
+	t_img	*so;
+	t_img	*we;
+	t_img	*no;
+	t_img	*ea;
 	t_ray	*ray;
 	t_all	*all;
 }				t_mlx;

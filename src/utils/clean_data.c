@@ -6,11 +6,12 @@
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 10:43:25 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/21 08:36:04 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/05/15 21:39:03 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+#include "exec.h"
 
 int	clean_config(t_config *config)
 {
@@ -63,6 +64,7 @@ void	end_program(char *error, int status)
 		clean_config(all->conf);
 	if (all->play)
 		free(all->play);
+	// end_mlx(all->mlx);
 	if (all)
 		free(all);
 	if (error != NULL)

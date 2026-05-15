@@ -6,7 +6,7 @@
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 18:21:29 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/21 08:33:47 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/05/15 20:48:09 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	fill_config(t_config *conf)
 	return (1);
 }
 
-int	fill_structs(t_all *all, int argc, char **argv)
+int	fill_structs(t_all *all, int argc, char **argv, t_mlx *mlx)
 {
 	if (!all)
 		return (0);
@@ -73,5 +73,6 @@ int	fill_structs(t_all *all, int argc, char **argv)
 	if (argc > 1)
 		all->maps->name = string_duplicate(argv[1]);
 	fill_config(all->conf);
+	all->mlx = mlx;
 	return (1);
 }
