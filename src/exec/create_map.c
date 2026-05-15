@@ -52,7 +52,7 @@ void	put_pixel(t_mlx *mlx, int x, int y, unsigned int color)
 	char	*adress;
 
 	adress = mlx->screen_img->adress + (y * mlx->screen_img->line_len
-		+ x * (mlx->screen_img->bits_per_pixel / 8))
+		+ x * (mlx->screen_img->bits_per_pixel / 8));
 	*(unsigned int *)adress = color;
 }
 
@@ -65,21 +65,21 @@ void	put_wall(t_mlx *mlx, int x, int wall_color)
 	double	draw_end;
 
 	y = -1;
-	screen_h = (mlx->all->maps->lines * 64);
+	screen_h = mlx->all->maps->lines * 64;
 	line_height = screen_h / mlx->ray->wall_dist;
 	draw_start = screen_h / 2 - line_height / 2; 
-	draw_end = screen_h / 2 + line_height / 2; 
+	draw_end = screen_h / 2 + line_height / 2;
 	if (draw_start < 0)
 		draw_start = 0;
 	if (draw_end >= screen_h)
 		draw_end = screen_h - 1;
-	wall_color = (0xAA0000 * mlx->ray->side) + (0xFF0000 * (mlx->ray->side == 0))
+	wall_color = (0x8B8B8B * mlx->ray->side) + (0x5A5A5A * (mlx->ray->side == 0));
 	while (++y < screen_h)
 	{
 		if (y < draw_start)
 			put_pixel(mlx, x, y, 0x87CEEB);
 		else if (y <= draw_end)
-			put_pixel(mlx, x, y, wall_color):
+			put_pixel(mlx, x, y, wall_color);
 		else
 			put_pixel(mlx, x, y, 0x4A3728);
 	}
@@ -87,32 +87,37 @@ void	put_wall(t_mlx *mlx, int x, int wall_color)
 
 void	dda_step_assign(t_mlx *mlx, t_ray *ray, double rayDirX, double rayDirY)
 {
+	double pos_x;
+	double pos_y;
+
+	pos_x = mlx->x_test / 64.0;
+	pos_y = mlx->y_test / 64.0;
 	if (rayDirX < 0)
 	{
 		ray->step_x = -1;
-		ray->side_dist_x = (mlx->x_test - ray->map_x) * ray->delta_dist_x;
+		ray->side_dist_x = (pos_x - ray->map_x) * ray->delta_dist_x;
 	}
 	else
 	{
 		ray->step_x = 1;
-		ray->side_dist_x = (ray->map_x + 1 - mlx->x_test) * ray->delta_dist_x;
+		ray->side_dist_x = (ray->map_x + 1 - pos_x) * ray->delta_dist_x;
 	}
 	if (rayDirY < 0)
 	{
 		ray->step_y = -1;
-		ray->side_dist_y = (mlx->y_test - ray->map_y) * ray->delta_dist_y;
+		ray->side_dist_y = (pos_y - ray->map_y) * ray->delta_dist_y;
 	}
 	else
 	{
 		ray->step_y = 1;
-		ray->side_dist_y = (ray->map_y + 1 - mlx->y_test) * ray->delta_dist_y;
+		ray->side_dist_y = (ray->map_y + 1 - pos_y) * ray->delta_dist_y;
 	}
 }
 
 void	dda_ray(t_mlx *mlx, t_ray *ray, double rayDirX, double rayDirY)
 {
-	ray->map_x = mlx->x_test / 64;
-	ray->map_y = mlx->y_test / 64;
+	ray->map_x = (int)(mlx->x_test / 64.0);
+	ray->map_y = (int)(mlx->y_test / 64.0);
 	ray->delta_dist_x = fabs(1.0 / rayDirX);
 	ray->delta_dist_y = fabs(1.0 / rayDirY);
 	dda_step_assign(mlx, ray, rayDirX, rayDirY);
@@ -155,6 +160,6 @@ void	put_map_in_buffer(t_mlx *mlx)
 		dda_ray(mlx, mlx->ray, rayDirX, rayDirY);
 		put_wall(mlx, x, 0xFF0000);
 	}
-	put_pixel(mlx, mlx->player_img->adress, mlx->y_test, mlx->x_test);
+	//put_pixel(mlx, mlx->player_img->adress, mlx->y_test, mlx->x_test);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->screen_img->img, 0, 0);
 }

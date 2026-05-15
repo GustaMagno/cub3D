@@ -34,8 +34,8 @@ int	mlx_assign(t_mlx *mlx, t_all *all)
 	mlx->win = mlx_new_window(mlx->mlx, all->maps->columns * 64, all->maps->lines * 64, "cube3D");
 	if (!mlx->win)
         return (free(mlx->mlx), 0);
-	mlx->x_test = 10 * 64;
-	mlx->y_test = 2 * 64;
+	mlx->x_test = (mlx->all->play->column * 64) + 32;
+	mlx->y_test = (mlx->all->play->line * 64) + 32;
 	mlx->ray = ft_calloc(1, sizeof(t_ray));
 	if (!mlx->ray)
         return (free(mlx->mlx), free(mlx->win), 0);
