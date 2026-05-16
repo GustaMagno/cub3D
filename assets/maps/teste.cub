@@ -1,7 +1,7 @@
-NO ./assets/sprites/teste
-SO ./assets/sprites/teste
-WE ./assets/sprites/teste
-EA ./assets/sprites/teste
+NO ./assets/sprites/north.xpm
+SO ./assets/sprites/south.xpm
+WE ./assets/sprites/west.xpm
+EA ./assets/sprites/east.xpm
 F ./assets/sprites/teste
 C ./assets/sprites/teste
 
