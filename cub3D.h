@@ -139,6 +139,8 @@ typedef struct s_mlx
 	int		k_a;
 	int		k_s;
 	int		k_d;
+	int		k_lrot;
+	int		k_rrot;
 	double	x_test;
 	double	y_test;
 	t_img	*screen_img;

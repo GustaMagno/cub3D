@@ -22,6 +22,10 @@ int	key_handler(int keycode, void *mlx)
 		p->k_s = 1;
 	if (keycode == KEY_D)
 		p->k_d = 1;
+	if (keycode == LEFT)
+		p->k_lrot = 1;
+	if (keycode == RIGHT)
+		p->k_rrot = 1;
 	return (1);
 }
 
@@ -38,6 +42,10 @@ int		key_release(int keycode, void *p)
 		mlx->k_s = 0;
 	if (keycode == KEY_D)
 		mlx->k_d = 0;
+	if (keycode == LEFT)
+		mlx->k_lrot = 0;
+	if (keycode == RIGHT)
+		mlx->k_rrot = 0;
 	return (0);
 }
 
@@ -53,7 +61,8 @@ t_img	*new_img(t_mlx *mlx, int width, int height)
 	img->img = mlx_new_image(mlx->mlx, img->width, img->height);
 	if (!img->img)
 		return (NULL);
-	img->adress = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_len, &img->endian);
+	img->adress = mlx_get_data_addr(img->img, &img->bits_per_pixel,
+		&img->line_len, &img->endian);
 	if (!img->img)
 		return (NULL);
 	return (img);
@@ -86,7 +95,7 @@ int	create_images(t_mlx *mlx)
 		return (free(mlx->blue_img), free(mlx->player_img) ,0);
 	mlx->screen_img = new_img(mlx, mlx->all->maps->columns * 64, mlx->all->maps->lines * 64);
 	if (!mlx->blue_img)
-		return (free(mlx->blue_img), free(mlx->red_img), free(mlx->player_img) ,0);
+		return (free(mlx->blue_img), free(mlx->red_img), free(mlx->player_img), 0);
 	return (1);
 }
 
