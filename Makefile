@@ -37,6 +37,7 @@ SRCS = cub3D.c \
 		src/exec/end_mlx.c \
 		src/exec/game_loop.c \
 		src/exec/create_map.c \
+		src/exec/create_images.c \
 		src/utils/ft_calloc.c \
 
 OBJS = $(patsubst %.c,$(BUILD_DIR)/%.o,$(SRCS))
