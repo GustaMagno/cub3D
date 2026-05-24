@@ -141,6 +141,9 @@ typedef struct s_mlx
 	int		k_d;
 	int		k_lrot;
 	int		k_rrot;
+	int		screen_h;
+	double	draw_start;
+	double	draw_end;
 	double	x_test;
 	double	y_test;
 	t_img	*screen_img;

@@ -1,7 +1,7 @@
 #include "exec.h"
 #include "utils.h"
 
-t_img *new_file_img(void *mlx, char *adress)
+t_img	*new_file_img(void *mlx, char *adress)
 {
 	t_img *img;
 
@@ -35,4 +35,3 @@ int	create_all_images(t_mlx *mlx, t_config *conf)
 			"Check texture paths and XPM files.", 1), 0);
 	return (1);
 }
-

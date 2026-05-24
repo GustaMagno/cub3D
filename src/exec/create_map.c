@@ -1,23 +1,5 @@
 #include "exec.h"
 
-unsigned int	get_color(t_img *img, int x, int y)
-{
-	unsigned int	color;
-
-	color = *(unsigned int *)(img->adress + (y * img->line_len
-		+ x * (img->bits_per_pixel / 8)));
-	return (color);
-}
-
-void	put_pixel(t_mlx *mlx, int x, int y, unsigned int color)
-{
-	char	*adress;
-
-	adress = mlx->screen_img->adress + (y * mlx->screen_img->line_len
-		+ x * (mlx->screen_img->bits_per_pixel / 8));
-	*(unsigned int *)adress = color;
-}
-
 unsigned int	wall_colorH(t_img *img, double wall_W, int wallH, int y)
 {
 	double	percent_H;
@@ -27,7 +9,6 @@ unsigned int	wall_colorH(t_img *img, double wall_W, int wallH, int y)
 	return (get_color(img, (int)wall_W, (int)percent_H));
 }
 
-
 double	texture_pointW(t_mlx *mlx, double rayDirX, double rayDirY)
 {
 	double	wall_pointW;
@@ -36,92 +17,38 @@ double	texture_pointW(t_mlx *mlx, double rayDirX, double rayDirY)
 	{
 		wall_pointW = (mlx->y_test / 64.0) + mlx->ray->wall_dist * rayDirY;
 		wall_pointW -= floor(wall_pointW);
-		if (mlx->ray->step_x > 0)
-			wall_pointW = 1.0 - wall_pointW;
 	}
 	else
 	{
 		wall_pointW = (mlx->x_test / 64.0) + mlx->ray->wall_dist * rayDirX;
-		wall_pointW -= floor(wall_pointW);
-		if (mlx->ray->step_y < 0)
-			wall_pointW = 1.0 - wall_pointW;
+		wall_pointW -= floor(wall_pointW);	
 	}
 	return (wall_pointW * 64);
-}
-
-t_img	*wall_img(t_mlx *mlx)
-{
-	if (mlx->ray->side == 0)
-	{
-		if (mlx->ray->step_x > 0)
-			return (mlx->ea);
-		else
-			return(mlx->we);
-	}
-	if (mlx->ray->step_y > 0)
-		return (mlx->so);
-	return (mlx->no);
-	
 }
 
 void	draw_image(t_mlx *mlx, int x, double rayDirX, double rayDirY)
 {
 	int		y;
-	int		screen_h;
 	double	line_height;
 	double	draw_start_real;
 	double	draw_end_real;
-	double	draw_start;
-	double	draw_end;
-	double	teste;
+	double	texture_W;
 
 	y = -1;
-	screen_h = mlx->all->maps->lines * 64;
-	line_height = screen_h / mlx->ray->wall_dist;
-	draw_start_real = screen_h / 2 - line_height / 2;
-	draw_end_real   = screen_h / 2 + line_height / 2;
-	draw_start = draw_start_real < 0 ? 0 : draw_start_real;
-	draw_end   = draw_end_real >= screen_h ? screen_h - 1 : draw_end_real;
-	mlx->wall_img = wall_img(mlx);
-	teste = texture_pointW(mlx, rayDirX, rayDirY);
-	while (++y < screen_h)
+	line_height = mlx->screen_h / mlx->ray->wall_dist;
+	draw_start_real = mlx->screen_h / 2 - line_height / 2;
+	draw_end_real = mlx->screen_h / 2 + line_height / 2;
+	assign_draw(mlx, draw_start_real, draw_end_real);
+	texture_W = texture_pointW(mlx, rayDirX, rayDirY);
+	while (++y < mlx->screen_h)
 	{
-		if (y < draw_start)
+		if (y < mlx->draw_start)
 			put_pixel(mlx, x, y, 0x87CEEB);
-		else if (y <= draw_end)
-			put_pixel(mlx, x, y, wall_colorH(mlx->wall_img, teste,
+		else if (y <= mlx->draw_end)
+			put_pixel(mlx, x, y, wall_colorH(mlx->wall_img, texture_W,
 				line_height, y - draw_start_real));
 		else
 			put_pixel(mlx, x, y, 0x4A3728);
-	}
-}
-
-void	dda_step_assign(t_mlx *mlx, t_ray *ray, double rayDirX, double rayDirY)
-{
-	double pos_x;
-	double pos_y;
-
-	pos_x = mlx->x_test / 64.0;
-	pos_y = mlx->y_test / 64.0;
-	if (rayDirX < 0)
-	{
-		ray->step_x = -1;
-		ray->side_dist_x = (pos_x - ray->map_x) * ray->delta_dist_x;
-	}
-	else
-	{
-		ray->step_x = 1;
-		ray->side_dist_x = (ray->map_x + 1 - pos_x) * ray->delta_dist_x;
-	}
-	if (rayDirY < 0)
-	{
-		ray->step_y = -1;
-		ray->side_dist_y = (pos_y - ray->map_y) * ray->delta_dist_y;
-	}
-	else
-	{
-		ray->step_y = 1;
-		ray->side_dist_y = (ray->map_y + 1 - pos_y) * ray->delta_dist_y;
 	}
 }
 
