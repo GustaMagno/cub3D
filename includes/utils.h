@@ -50,6 +50,7 @@ int		clear_config(t_config *config); //Free's all config strings
 int     clean_maps(t_map *maps); //Free's all variables of struct 't_map *map'.
 
 //=====- is_something.c -=======================================================
+int		is_numeric(char xar);
 int		is_white_space(char xar); //Check if the given character is an white_space
 int		is_alpha_numeric(char xar); // Check if the given character is alphabetical or numerical
 

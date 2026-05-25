@@ -20,6 +20,9 @@ int     check_map_type(char *map_name); //Verify if the map_file end with '.cub'
 int     check_close_walls(char **map); //Verify if the map is surrounded by '1'
 int		check_characters(t_map *maps, t_play *play); //Verify all characters.
 int     check_config_adresses(t_config *conf); //Verify all config adresses
+int		parse_and_set_rgb(t_config *config);
+int		get_element_color(char *string);
+int		get_next_number(char *string, int *index, char xar);
 
 //=====- parse_utils.c -========================================================
 int     adress_is_valid(char *adress); //Check if open(adress) returns a valid FD.
