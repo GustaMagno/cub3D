@@ -2,8 +2,8 @@ NO ./assets/sprites/north.xpm
 SO ./assets/sprites/south.xpm
 WE ./assets/sprites/west.xpm
 EA ./assets/sprites/east.xpm
-F    0,255,200
-C 240,12,45
+F	30,30,30
+C	30,160,255
 
 1111111111111111111
 1010000000100100001

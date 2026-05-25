@@ -3,7 +3,7 @@ ARG = map.cub
 
 CC = cc
 GCC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3 -O0
 GFLAGS = -Wall -Wextra -Werror -g3 -O0
 VALGRIND = valgrind \
 			--leak-check=full \

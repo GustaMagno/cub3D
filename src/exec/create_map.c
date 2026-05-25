@@ -6,7 +6,7 @@ unsigned int	wall_colorH(t_img *img, double wall_W, int wallH, int y)
 
 	percent_H = (double) y / wallH;
 	percent_H *= 64;
-	return (get_color(img, (int)wall_W, (int)percent_H));
+	return (get_color(img, (int)wall_W, (int)(percent_H + 0.4)));
 }
 
 double	texture_pointW(t_mlx *mlx, double rayDirX, double rayDirY)
@@ -43,12 +43,12 @@ void	draw_image(t_mlx *mlx, int x, double rayDirX, double rayDirY)
 	while (++y < mlx->screen_h)
 	{
 		if (y < mlx->draw_start)
-			put_pixel(mlx, x, y, 0x87CEEB);
+			put_pixel(mlx, x, y, mlx->all->conf->color_c);
 		else if (y <= mlx->draw_end)
 			put_pixel(mlx, x, y, wall_colorH(mlx->wall_img, texture_W,
 				line_height, y - draw_start_real));
 		else
-			put_pixel(mlx, x, y, 0x4A3728);
+			put_pixel(mlx, x, y, mlx->all->conf->color_f);
 	}
 }
 

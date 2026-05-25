@@ -77,7 +77,7 @@ int	render_game(void *p)
 		return (0);
 	mlx = (t_mlx *)p;
 	put_map_in_buffer(mlx);
-	move_player(mlx, 2, mlx->x_test, mlx->y_test);
+	move_player(mlx, 4, mlx->x_test, mlx->y_test);
 	if (mlx->k_lrot == 1)
 		rotate_player(mlx->ray, -0.04);
 	if (mlx->k_rrot == 1)

@@ -119,12 +119,10 @@ int get_next_number(char *string, int *index, char xar)
         return (-1);
     color = 0;
     count = 0;
-	// printf("oi\n");
     while (string[*index] && string[*index] != ',')
     {
         if (!is_numeric(string[*index]))
-            return (printf("oi2\n"), printf("char: %c\n", string[*index]), -1);
-        printf("index: %d    string[index] == %c\n", *index, string[*index]);
+            return (-1);
         color = (color * 10) + (string[*index] - 48);
         (*index)++;
         count++;
@@ -134,15 +132,7 @@ int get_next_number(char *string, int *index, char xar)
     return (color);
 }
 
-// 0 255 80 4
 
-// 0 0 0 255
-
-// 0 0 255 0
-
-// 0 0 255 80
-
-// 0 255 80 0
 
 int get_element_color(char *string)
 {
@@ -157,24 +147,16 @@ int get_element_color(char *string)
     while (++count < 3 && string[index])
     {
         number = get_next_number(string, &index, ',');
-		printf("number1 ---------->> %d\n", number);
         if (number < 0 || number > 255)
 			end_program("Invalid number on RGB configuration", 1);
         color += number;
-		printf("color: %d\n", color);
         if (string[index] == ',')
             ++index;
         if (count < 2)
-		{
             color = color << RGB_BIT;
-		}
-		// printf("number1 ---------->> %d\n", number);
     }
     if (string[index] != '\0')
-	{
-		printf("char: %c\n", string[index]);
 		return (end_program("Invalid configuration in RGB element", 1), -1);
-	}
     return (color);
 }
 
@@ -187,7 +169,7 @@ int parse_and_set_rgb(t_config *config)
         return (end_program("Invalid number on RGB element F", 1), 0);
     config->color_c = get_element_color(config->c);
     if (config->color_c < 0)
-        return (printf("number: %d\n", config->color_c), end_program("Invalid number on RGB element C", 1), 0);
+        return (end_program("Invalid number on RGB element C", 1), 0);
     return (1);
 }
 
@@ -210,8 +192,6 @@ void	parse(t_all *all)
 		end_program("Invalid adress in map configuration", 1);
 	if (!parse_and_set_rgb(all->conf))
 		end_program("Invalid rgb format in map configuration", 1);
-	printf("Color_c: %d\n", all->conf->color_c);
-	printf("Color_f: %d\n", all->conf->color_f);
 	if (!set_map_grid(all->maps, all->conf, beginning))
 		end_program("Failed to set map_grip from file", 1);
 	if (!check_characters(all->maps, all->play))
