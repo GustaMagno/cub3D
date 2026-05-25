@@ -1,116 +1,54 @@
 #include "exec.h"
 
-void	*conditional_img(t_mlx *mlx, char tale)
+unsigned int	wall_colorH(t_img *img, double wall_W, int wallH, int y)
 {
-	if (tale == '1')
-		return (mlx->red_img->adress);
-	if (tale == '0')
-		return (mlx->blue_img->adress);
-	if (tale == 'N' || tale == 'S' || tale == 'E' || tale == 'W')
-		return (mlx->blue_img->adress);
-	return (mlx->blue_img->adress);
+	double	percent_H;
+
+	percent_H = (double) y / wallH;
+	percent_H *= 64;
+	return (get_color(img, (int)wall_W, (int)percent_H));
 }
 
-//void	put_pixel(t_mlx *mlx, char *pixeis, int y, int x)
-//{
-//	int		i;
-//	int		j;
-//	size_t	line_pixeis;
-//	size_t	i_pixel;
-//
-//	i = 0;
-//	line_pixeis = mlx->screen_img->line_len / (mlx->screen_img->bits_per_pixel / 8);
-//	i_pixel = (line_pixeis * y) + (x);
-//	while (i < 64)
-//	{
-//		j = -1;
-//		while (++j < 64)
-//			((int *)mlx->screen_img->adress)[i_pixel++] = ((int *)pixeis)[j];
-//		i_pixel += (line_pixeis - (line_pixeis / mlx->all->maps->columns));
-//		i++;
-//	}
-//}
-
-// void	put_map_in_buffer(t_mlx *mlx)
-// {
-// 	int	y;
-// 	int	x;
-
-// 	y = -1;
-// 	while (mlx->all->maps->map[++y])
-// 	{
-// 		x = -1;
-// 		while (mlx->all->maps->map[y][++x])
-// 			put_pixel(mlx, conditional_img(mlx, mlx->all->maps->map[y][x]), y * 64, x * 64);
-// 	}
-// 	put_pixel(mlx, mlx->player_img->adress, mlx->y_test, mlx->x_test);
-// 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->screen_img->img, 0, 0);
-// }
-
-void	put_pixel(t_mlx *mlx, int x, int y, unsigned int color)
+double	texture_pointW(t_mlx *mlx, double rayDirX, double rayDirY)
 {
-	char	*adress;
+	double	wall_pointW;
 
-	adress = mlx->screen_img->adress + (y * mlx->screen_img->line_len
-		+ x * (mlx->screen_img->bits_per_pixel / 8));
-	*(unsigned int *)adress = color;
+	if (mlx->ray->side == 0)
+	{
+		wall_pointW = (mlx->y_test / 64.0) + mlx->ray->wall_dist * rayDirY;
+		wall_pointW -= floor(wall_pointW);
+	}
+	else
+	{
+		wall_pointW = (mlx->x_test / 64.0) + mlx->ray->wall_dist * rayDirX;
+		wall_pointW -= floor(wall_pointW);	
+	}
+	return (wall_pointW * 64);
 }
 
-void	put_wall(t_mlx *mlx, int x, int wall_color)
+void	draw_image(t_mlx *mlx, int x, double rayDirX, double rayDirY)
 {
 	int		y;
-	int		screen_h;
 	double	line_height;
-	double	draw_start;
-	double	draw_end;
+	double	draw_start_real;
+	double	draw_end_real;
+	double	texture_W;
 
 	y = -1;
-	screen_h = mlx->all->maps->lines * 64;
-	line_height = screen_h / mlx->ray->wall_dist;
-	draw_start = screen_h / 2 - line_height / 2; 
-	draw_end = screen_h / 2 + line_height / 2;
-	if (draw_start < 0)
-		draw_start = 0;
-	if (draw_end >= screen_h)
-		draw_end = screen_h - 1;
-	wall_color = (0x8B8B8B * mlx->ray->side) + (0x5A5A5A * (mlx->ray->side == 0));
-	while (++y < screen_h)
+	line_height = mlx->screen_h / mlx->ray->wall_dist;
+	draw_start_real = mlx->screen_h / 2 - line_height / 2;
+	draw_end_real = mlx->screen_h / 2 + line_height / 2;
+	assign_draw(mlx, draw_start_real, draw_end_real);
+	texture_W = texture_pointW(mlx, rayDirX, rayDirY);
+	while (++y < mlx->screen_h)
 	{
-		if (y < draw_start)
+		if (y < mlx->draw_start)
 			put_pixel(mlx, x, y, 0x87CEEB);
-		else if (y <= draw_end)
-			put_pixel(mlx, x, y, wall_color);
+		else if (y <= mlx->draw_end)
+			put_pixel(mlx, x, y, wall_colorH(mlx->wall_img, texture_W,
+				line_height, y - draw_start_real));
 		else
 			put_pixel(mlx, x, y, 0x4A3728);
-	}
-}
-
-void	dda_step_assign(t_mlx *mlx, t_ray *ray, double rayDirX, double rayDirY)
-{
-	double pos_x;
-	double pos_y;
-
-	pos_x = mlx->x_test / 64.0;
-	pos_y = mlx->y_test / 64.0;
-	if (rayDirX < 0)
-	{
-		ray->step_x = -1;
-		ray->side_dist_x = (pos_x - ray->map_x) * ray->delta_dist_x;
-	}
-	else
-	{
-		ray->step_x = 1;
-		ray->side_dist_x = (ray->map_x + 1 - pos_x) * ray->delta_dist_x;
-	}
-	if (rayDirY < 0)
-	{
-		ray->step_y = -1;
-		ray->side_dist_y = (pos_y - ray->map_y) * ray->delta_dist_y;
-	}
-	else
-	{
-		ray->step_y = 1;
-		ray->side_dist_y = (ray->map_y + 1 - pos_y) * ray->delta_dist_y;
 	}
 }
 
@@ -158,8 +96,7 @@ void	put_map_in_buffer(t_mlx *mlx)
 		rayDirX = mlx->ray->dirX + mlx->ray->planeX * cameraX;
 		rayDirY = mlx->ray->dirY + mlx->ray->planeY * cameraX;
 		dda_ray(mlx, mlx->ray, rayDirX, rayDirY);
-		put_wall(mlx, x, 0xFF0000);
+		draw_image(mlx, x, rayDirX, rayDirY);
 	}
-	// put_pixel(mlx, mlx->player_img->adress, mlx->y_test, mlx->x_test);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->screen_img->img, 0, 0);
 }

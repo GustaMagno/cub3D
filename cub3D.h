@@ -139,10 +139,16 @@ typedef struct s_mlx
 	int		k_a;
 	int		k_s;
 	int		k_d;
+	int		k_lrot;
+	int		k_rrot;
+	int		screen_h;
+	double	draw_start;
+	double	draw_end;
 	double	x_test;
 	double	y_test;
 	t_img	*screen_img;
 	t_img	*red_img;
+	t_img	*wall_img;
 	t_img	*blue_img;
 	t_img	*player_img;
 	t_img	*so;

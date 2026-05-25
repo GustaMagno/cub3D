@@ -37,7 +37,7 @@ int	mlx_assign(t_mlx *mlx, t_all *all)
 	mlx->x_test = (mlx->all->play->column * 64) + 32;
 	mlx->y_test = (mlx->all->play->line * 64) + 32;
 	mlx->ray = ft_calloc(1, sizeof(t_ray));
-	
+	mlx->screen_h = mlx->all->maps->lines * 64;
 	if (!mlx->ray)
         return (free(mlx->mlx), free(mlx->win), 0);
 	dir_assign(mlx, all);

@@ -45,6 +45,7 @@ char	*get_map_adress(char *map_name); //Gets struct 'all' adress from any place
 
 //=====- data_structure.c -===============================================================
 void	init_structs(t_all **all);//Mallocs and sets '0' all structs of the project
+int		create_all_images(t_mlx *mlx, t_config *conf);
 t_all	*get_all_reference(t_all *all);//Returns 'all' adress when arg is NULL
 int		fill_structs(t_all *all, int argc, char **argv, t_mlx *mlx);//Used at beginning of main
 int		fill_config(t_config *conf); //Initialize struct 'config' variables.
