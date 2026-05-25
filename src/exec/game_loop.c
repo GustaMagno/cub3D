@@ -5,8 +5,16 @@ int		colision(t_mlx *mlx, double p_x, double p_y)
 	int	x;
 	int	y;
 
-	x = (int)p_x / 64;
-	y = (int)p_y / 64;
+	x = (int)(p_x) / 64;
+	y = (int)(p_y) / 64;
+	if (mlx->all->maps->map[y][x] == '1')
+		return (1);
+	x = (int)(p_x + 1) / 64;
+	y = (int)(p_y + 1) / 64;
+	if (mlx->all->maps->map[y][x] == '1')
+		return (1);
+	x = (int)(p_x - 1) / 64;
+	y = (int)(p_y - 1) / 64;
 	if (mlx->all->maps->map[y][x] == '1')
 		return (1);
 	return (0);
@@ -61,10 +69,10 @@ int	render_game(void *p)
 		return (0);
 	mlx = (t_mlx *)p;
 	put_map_in_buffer(mlx);
-	move_player(mlx, 0.15, mlx->x_test, mlx->y_test);
+	move_player(mlx, 2, mlx->x_test, mlx->y_test);
 	if (mlx->k_lrot == 1)
-		rotate_player(mlx->ray, -0.005);
+		rotate_player(mlx->ray, -0.02);
 	if (mlx->k_rrot == 1)
-		rotate_player(mlx->ray, 0.005);
+		rotate_player(mlx->ray, 0.02);
 	return (1);
 }

@@ -70,7 +70,7 @@ t_img	*new_img(t_mlx *mlx, int width, int height)
 
 int	mlx_exec(t_mlx *mlx)
 {
-	mlx->screen_img = new_img(mlx, mlx->all->maps->columns * 64, mlx->all->maps->lines * 64);
+	mlx->screen_img = new_img(mlx, 1920, 1080);
 	if (!mlx->screen_img)
 		return (free(mlx->blue_img), free(mlx->red_img), free(mlx->player_img), 0);
 	create_all_images(mlx, mlx->all->conf);

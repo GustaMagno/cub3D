@@ -89,7 +89,7 @@ void	put_map_in_buffer(t_mlx *mlx)
 	double	rayDirX;
 
 	x = -1;
-	screenW = mlx->all->maps->columns * 64;
+	screenW = 1920;
 	while (++x < screenW)
 	{
 		cameraX = 2.0 * x / screenW - 1;
