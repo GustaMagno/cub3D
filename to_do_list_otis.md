@@ -17,6 +17,8 @@ Finish time: 12/05/2026 ~~ 15/05/2026
 
 1-Verificar edge-case em "config" (adicionar letras extra: SO123 ./assets/sprites/teste)
 
+2-admitir "+" no parsing do rgb <!-- ambiguo
+
 <!-- 1-Precisa parsear os elementos de config? (O avaliador pode alterar?) confirmar -->
 <!-- 2-"maps->columns" fiz apenas "string_lenght"
         mas pode ter whitespaces depois. Criar função dedicada. -->

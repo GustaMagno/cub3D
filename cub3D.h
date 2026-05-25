@@ -28,6 +28,7 @@
 # define TEX_FLOOR "F"
 # define TEX_CEIL  "C"
 
+# define RGB_BIT 8
 # define WIDTH 64
 # define HEIGHT 64
 
@@ -70,16 +71,17 @@ typedef struct s_play
 
 typedef struct s_config
 {
-	char *no;
-	char *so;
-	char *we;
-	char *ea;
-	char *f;
-	char *c;
-	char *ref[7];
-	int	count;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	char	*f;
+	char	*c;
+	int		color_f;
+	int		color_c;
+	char	*ref[7];
+	int		count;
 }				t_config;
-
 
 typedef struct s_all
 {

@@ -6,11 +6,20 @@
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 04:54:16 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/21 04:01:31 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/05/25 19:07:47 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+
+int	is_numeric(char xar)
+{
+	if (!xar)
+		return (0);
+	if (xar >= '0' && xar <= '9')
+		return (1);
+	return (0);
+}
 
 int	is_white_space(char xar)
 {
