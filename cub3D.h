@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/26 20:04:37 by gustoliv          #+#    #+#             */
+/*   Updated: 2026/05/26 20:04:37 by gustoliv         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -32,7 +44,7 @@
 # define WIDTH 64
 # define HEIGHT 64
 
-typedef unsigned long t_ul;
+typedef unsigned long	t_ul;
 
 typedef enum s_dir
 {
@@ -50,9 +62,9 @@ typedef struct s_gnl
 	int		start;
 	int		end;
 	int		readbytes;
-}				t_gnl;
+}	t_gnl;
 
-typedef	struct s_map
+typedef struct s_map
 {
 	char	**file;
 	char	**map;
@@ -112,7 +124,6 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_len;
 	int		endian;
-	
 }	t_img;
 
 typedef struct s_ray
@@ -122,10 +133,10 @@ typedef struct s_ray
 	double	delta_dist_y;
 	double	side_dist_x;
 	double	side_dist_y;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
+	double	dirx;
+	double	diry;
+	double	planex;
+	double	planey;
 	int		map_x;
 	int		map_y;
 	int		step_x;

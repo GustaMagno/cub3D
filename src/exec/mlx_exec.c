@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_exec.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/26 19:43:19 by gustoliv          #+#    #+#             */
+/*   Updated: 2026/05/26 19:43:19 by gustoliv         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "exec.h"
 #include "parse.h"
 
@@ -29,7 +41,7 @@ int	key_handler(int keycode, void *mlx)
 	return (1);
 }
 
-int		key_release(int keycode, void *p)
+int	key_release(int keycode, void *p)
 {
 	t_mlx	*mlx;
 
@@ -62,7 +74,7 @@ t_img	*new_img(t_mlx *mlx, int width, int height)
 	if (!img->img)
 		return (NULL);
 	img->adress = mlx_get_data_addr(img->img, &img->bits_per_pixel,
-		&img->line_len, &img->endian);
+			&img->line_len, &img->endian);
 	if (!img->img)
 		return (NULL);
 	return (img);
@@ -72,7 +84,8 @@ int	mlx_exec(t_mlx *mlx)
 {
 	mlx->screen_img = new_img(mlx, 1920, 1080);
 	if (!mlx->screen_img)
-		return (free(mlx->blue_img), free(mlx->red_img), free(mlx->player_img), 0);
+		return (free(mlx->blue_img), free(mlx->red_img),
+			free(mlx->player_img), 0);
 	create_all_images(mlx, mlx->all->conf);
 	mlx_hook(mlx->win, 2, 1L << 0, key_handler, mlx);
 	mlx_hook(mlx->win, 17, 0, close_x, mlx);

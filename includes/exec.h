@@ -1,9 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/26 21:44:49 by gustoliv          #+#    #+#             */
+/*   Updated: 2026/05/26 22:05:34 by gustoliv         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef EXEC_H
 # define EXEC_H
 
-#include "cub3D.h"
+# include "cub3D.h"
 
-void			dda_step_assign(t_mlx *mlx, t_ray *ray, double rayDirX, double rayDirY);
+void			dda_step_assign(t_mlx *mlx, t_ray *ray, double raydirx,
+					double raydiry);
 void			put_pixel(t_mlx *mlx, int x, int y, unsigned int color);
 unsigned int	get_color(t_img *img, int x, int y);
 t_img			*wall_img(t_mlx *mlx);

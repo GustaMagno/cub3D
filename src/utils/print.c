@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:20:12 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/21 07:17:14 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/05/26 20:03:05 by gustoliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	print_error(char *message)
 {
 	static char	*standard_error;
 	static int	error_size;
-	int size;
+	int			size;
 
 	if (!standard_error || !error_size)
 	{
@@ -51,9 +51,9 @@ int	print_error(char *message)
 
 int	print_errors(char **messages, int line, int column, int coordinates)
 {
-	static char *standard_error;
+	static char	*standard_error;
 	static int	error_size;
-	int	index;
+	int			index;
 
 	if (!standard_error || !!error_size)
 	{
@@ -80,14 +80,14 @@ int	print_errors(char **messages, int line, int column, int coordinates)
 int	map_debugger(char **map, char *message)
 {
 	int	line;
-	
+
 	if (!map || !message)
 		return (0);
-	line = 0;	
+	line = 0;
 	printf("%s\n", message);
 	while (map[line])
 	{
-		printf("maps[%d]: %s\n",line, map[line]);
+		printf("maps[%d]: %s\n", line, map[line]);
 		line++;
 	}
 	if (map[line] == NULL)

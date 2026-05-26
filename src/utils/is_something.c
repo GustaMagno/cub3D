@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_something.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 04:54:16 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/05/25 19:07:47 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/05/26 20:00:34 by gustoliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,3 @@ int	is_alpha_numeric(char xar)
 		return (1);
 	return (0);
 }
-
