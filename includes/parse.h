@@ -17,18 +17,26 @@
 //=====- parse.c -==============================================================
 void	parse(t_all *all); //Do the whole parse of the project
 int     check_map_type(char *map_name); //Verify if the map_file end with '.cub'
-int     check_close_walls(char **map); //Verify if the map is surrounded by '1'
+int     check_close_walls(char **map, int column_size, int line_size); //Verify if the map is surrounded by '1'
 int		check_characters(t_map *maps, t_play *play); //Verify all characters.
 int     check_config_adresses(t_config *conf); //Verify all config adresses
 int		parse_and_set_rgb(t_config *config);
 int		get_element_color(char *string);
 int		get_next_number(char *string, int *index, char xar);
+int		closed_ends(char **map, int column_size, int line_size);
+int		next_index_non_whitespace(char *string, int *index, int pre_increment); // Sets 'index' to represent the next non-whitespace character
+int		next_line_non_whitespace(char **map, int column, int *line, int pre_increment);
+int		last_index_non_whitespace(char *string, int *index);
 
 //=====- parse_utils.c -========================================================
 int     adress_is_valid(char *adress); //Check if open(adress) returns a valid FD.
 int     is_valid(char xar, int w_spaces); //Check if 'xar' is allowed on the map. Set 'w_spaces' true to include white spaces.
 int		is_config(char *string, t_config *conf); // Verify if the 'string' argument is a configuration of the chosen map file
 int     check_axis(char **map, int *line, int *column, int *axis); //Check if an specific axis set by "*axis", begin all parts of the map with '1', and end with '1'.
+
+int		check_columns(char **map, int column_size);
+int		check_lines(char **map);
+
 int		set_player_info(t_play *player, int line, int column, char **map); //Set direction, line and column of the player.
 
 //=====- map_utils.c -==================================================

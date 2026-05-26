@@ -53,6 +53,27 @@ int	normalize_grid(t_map *maps, int beginning)
 	return (1);
 }
 
+// int	normalize_grid(t_map *maps, int beginning)
+// {
+// 	int	size;
+// 	int	line;
+
+// 	if (!maps)
+// 		return (0);	
+// 	line = beginning;
+// 	while (maps->file[line])
+// 	{
+// 		size = string_length(maps->file[line]);
+// 		if (size < maps->columns)
+// 		{
+// 			maps->file[line] = re_allocker(maps->file[line], size, maps->columns + 1, sizeof(*(maps->file[line])));
+// 			fix_padding_n_whitespaces(maps->file[line], size, maps->columns);		
+// 		}
+// 		line++;
+// 	}
+// 	return (1);
+// }
+
 int	set_config_content(char *string, char *config_element, t_config *config)
 {
 	char **element;

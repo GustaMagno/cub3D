@@ -1,4 +1,4 @@
-NO ./assets/sprites/north.xpm
+NO  ./assets/sprites/north.xpm
 SO ./assets/sprites/south.xpm
 WE ./assets/sprites/west.xpm
 EA ./assets/sprites/east.xpm
@@ -7,7 +7,7 @@ C	30,160,255
 
 1111111111111111111
 1010000000100100001
-1010001101000000001
+1010001101010000001
 1010000010N00111101
 1000000011111100001
 1000000000000000001

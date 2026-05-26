@@ -7,20 +7,20 @@ void	free_img(t_img *img, t_mlx *mlx)
 	{
 		if (img->img)
 			mlx_destroy_image(mlx->mlx, img->img);
-		free(img);
 	}
+	free(img);
 }
 
 void	end_mlx(t_mlx *mlx)
 {
 	if (mlx)
 	{
-		mlx_destroy_window(mlx->mlx, mlx->win);
 		free_img(mlx->screen_img, mlx);
 		free_img(mlx->so, mlx);
 		free_img(mlx->no, mlx);
 		free_img(mlx->we, mlx);
 		free_img(mlx->ea, mlx);
+		mlx_destroy_window(mlx->mlx, mlx->win);
 		mlx_destroy_display(mlx->mlx);
 		free(mlx->ray);
 		free(mlx->mlx);

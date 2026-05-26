@@ -12,11 +12,11 @@ t_img	*new_file_img(void *mlx, char *adress)
 		return (NULL);
 	img->img = mlx_xpm_file_to_image(mlx, adress, &img->width, &img->height);
 	if (!img->img)
-		return (NULL);
+		return (free(img), NULL);
 	img->adress = mlx_get_data_addr(img->img, &img->bits_per_pixel,
 		&img->line_len, &img->endian);
-	if (!img->adress)	
-		return (NULL);
+	if (!img->adress)
+		return (free(img), mlx_destroy_image(mlx, img->img), NULL);
 	return (img);
 }
 
@@ -29,7 +29,7 @@ int	create_all_images(t_mlx *mlx, t_config *conf)
 	mlx->we = new_file_img(mlx->mlx, conf->we);
 	mlx->ea = new_file_img(mlx->mlx, conf->ea);
 	if (!mlx->so || !mlx->no || !mlx->we || !mlx->ea)
-		return (end_program(
+		return (close_x(mlx), end_program(
 			"Error\n"
 			"Failed to load texture images.\n"
 			"Check texture paths and XPM files.", 1), 0);

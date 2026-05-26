@@ -19,6 +19,22 @@ Finish time: 12/05/2026 ~~ 15/05/2026
 
 2-admitir "+" no parsing do rgb <!-- ambiguo
 
+3- xrandr | grep '*' | awk '{print $1}' <!-- (Pega a resolucao do monitor do pc atual)
+
+
+-parsing mapa fechado. (segfault)
+-macro define malloc no codigo
+-norminette
+
+-minimapa
+-rotar com o mouse
+
+
+
+
+
+
+
 <!-- 1-Precisa parsear os elementos de config? (O avaliador pode alterar?) confirmar -->
 <!-- 2-"maps->columns" fiz apenas "string_lenght"
         mas pode ter whitespaces depois. Criar função dedicada. -->
