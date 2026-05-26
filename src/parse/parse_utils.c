@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 04:55:03 by olacerda          #+#    #+#             */
-/*   Updated: 2026/05/26 22:14:17 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/05/26 23:34:49 by gustoliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,36 +131,6 @@ int	check_columns(char **map, int column_size)
 	}
 	return (1);
 }
-
-
-// int	check_axis(char **map, int *line, int *column, int *axis)
-// {
-// 	(*line) = -1;
-// 	while (map[++(*line)])
-// 	{
-// 		(*column) = 0;
-// 		while (map[(*line)][(*column)])
-// 		{
-// 			if (is_valid(map[(*line)][(*column)], false))
-// 			{
-// 				if (((map[(*line)][(*column)] != '1') &&  ++(*axis)) || !map[(*line)][(*column)])
-// 					return (0);
-// 				while (map[(*line)] && is_valid(map[(*line)][(*column)], false))
-// 					(*axis)++;
-// 				if ((--(*axis) >= 0) && map[(*line)][(*column)] != '1')
-// 					return (0);
-// 			}
-//             if (((axis == line) && ++(*axis)) && (!map[(*line)] || !map[(*line)][(*column)]))
-// 				return (1);
-//             if ((axis == line) && map[(*line)] && map[(*line)][(*column)])
-//                 continue ;
-//             (void)((++(*column)) && (axis == line) && (*axis = 0));
-// 		}
-// 		if (axis == line)
-// 			return (1);
-// 	}
-// 	return (1);
-// }
 
 int	set_player_info(t_play *player, int line, int column, char **map)
 {

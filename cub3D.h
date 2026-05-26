@@ -149,6 +149,10 @@ typedef struct s_mlx
 	double	x_test;
 	double	y_test;
 	t_img	*screen_img;
+	t_img	*red_img;
+	t_img	*player_img;
+	t_img	*wall_img;
+	t_img	*blue_img;
 	t_img	*so;
 	t_img	*we;
 	t_img	*no;

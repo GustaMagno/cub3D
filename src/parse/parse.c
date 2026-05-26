@@ -46,7 +46,7 @@ int	check_close_walls(char **map, int column_size, int line_size)
 	if (!check_lines(map))
 		return (0);
 	printf("oie ---------->3\n");
-	if (!check_columns(map))
+	if (!check_columns(map, column_size))
 		return (0);
 	// if (!check_axis(map, &line, &column, &line))
 	// 	return (0);
