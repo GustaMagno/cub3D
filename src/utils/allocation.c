@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   allocation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 00:01:04 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/19 00:34:27 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/05/26 19:55:39 by gustoliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*re_allocker(void *pointer, t_ul size, t_ul new_size, t_ul type_size)
 	char	*result;
 	char	*string;
 	t_ul	index;
-	t_ul final_size;
+	t_ul	final_size;
 
 	if ((size <= 0) || (new_size <= 0))
 		return (NULL);
@@ -62,9 +62,9 @@ int	string_appender(char **string, char *adition)
 
 char	*string_duplicate(char *string)
 {
-	char *result;
-	int	size;
-	int	index;
+	char	*result;
+	int		size;
+	int		index;
 
 	if (!string)
 		return (NULL);
@@ -74,7 +74,7 @@ char	*string_duplicate(char *string)
 	result = malloc((size + 1) * sizeof(char));
 	if (!result)
 		return (end_program("Failed allocation in string_duplicate", 1), NULL);
-	index = 0;	
+	index = 0;
 	while (string[index])
 	{
 		result[index] = string[index];

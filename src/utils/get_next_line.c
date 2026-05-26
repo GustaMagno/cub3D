@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_no_breakline.c                                    :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olacerda <olacerda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/15 23:56:29 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/18 03:36:03 by olacerda         ###   ########.fr       */
+/*   Created: 2026/05/26 19:56:55 by gustoliv          #+#    #+#             */
+/*   Updated: 2026/05/26 19:59:58 by gustoliv         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "utils.h"
 
@@ -38,12 +38,12 @@ char	*liner(char *line, t_gnl *x, int *all_end, char *buffer)
 	return (new_line);
 }
 
-char *get_next_line_no_breakline(int fd)
+char	*get_next_line_no_breakline(int fd)
 {
-	static t_gnl	x[FD_SETSIZE];
-	static char		(buff[BUFFER_SIZE + 1])[FD_SETSIZE];
-	char 			*line;
-	int				all_end;
+	static t_gnl		x[FD_SETSIZE];
+	static	char		(buff[BUFFER_SIZE + 1])[FD_SETSIZE];
+	char				*line;
+	int					all_end;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -72,7 +72,6 @@ char *get_next_line_no_breakline(int fd)
 // 	char *line;
 // 	int	fd[3];
 
-	
 // 	fd[0] = open("teste.txt", O_RDONLY);
 // 	fd[1] = open("teste1.txt", O_RDONLY);
 // 	fd[2] = open("teste2.txt", O_RDONLY);

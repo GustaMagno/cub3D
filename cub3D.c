@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/26 20:03:31 by gustoliv          #+#    #+#             */
+/*   Updated: 2026/05/26 20:03:31 by gustoliv         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "exec.h"
 #include "parse.h"
 
@@ -5,23 +17,23 @@ void	dir_assign(t_mlx *mlx, t_all *all)
 {
 	if (all->play->direction == NO)
 	{
-		mlx->ray->dirY = -1;
-		mlx->ray->planeX = 0.66;
+		mlx->ray->diry = -1;
+		mlx->ray->planex = 0.66;
 	}
 	if (all->play->direction == SO)
 	{
-		mlx->ray->dirY = 1;
-		mlx->ray->planeX = -0.66;
+		mlx->ray->diry = 1;
+		mlx->ray->planex = -0.66;
 	}
 	if (all->play->direction == EA)
 	{
-		mlx->ray->dirX = 1;
-		mlx->ray->planeY = 0.66;
+		mlx->ray->dirx = 1;
+		mlx->ray->planey = 0.66;
 	}
 	if (all->play->direction == WE)
 	{
-		mlx->ray->dirX = -1;
-		mlx->ray->planeY = -0.66;
+		mlx->ray->dirx = -1;
+		mlx->ray->planey = -0.66;
 	}
 }
 
@@ -33,13 +45,15 @@ int	mlx_assign(t_mlx *mlx, t_all *all)
 		return (0);
 	mlx->win = mlx_new_window(mlx->mlx, 1920, 1080, "cube3D");
 	if (!mlx->win)
-        return (free(mlx->mlx), 0);
+		return (free(mlx->mlx), 0);
 	mlx->x_test = (mlx->all->play->column * 64) + 32;
 	mlx->y_test = (mlx->all->play->line * 64) + 32;
 	mlx->ray = ft_calloc(1, sizeof(t_ray));
+	if (!mlx->ray)
+		return (close_x(mlx), 0);
 	mlx->screen_h = 1080;
 	if (!mlx->ray)
-        return (free(mlx->mlx), free(mlx->win), 0);
+		return (free(mlx->mlx), free(mlx->win), 0);
 	dir_assign(mlx, all);
 	return (1);
 }

@@ -1,24 +1,22 @@
-
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_info.c                                         :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 22:23:07 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/17 18:18:17 by otlacerd         ###   ########.fr       */
+/*   Created: 2026/05/26 20:26:32 by gustoliv          #+#    #+#             */
+/*   Updated: 2026/05/26 20:26:52 by gustoliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-char *get_map_adress(char *map_name)
+char	*get_map_adress(char *map_name)
 {
-	char *full_adress;
-	char *folder;
-	int	append_necessity;
+	char	*full_adress;
+	char	*folder;
+	int		append_necessity;
 
 	if (!map_name)
 		end_program("Invalid pointer in get_map_adress", 1);
@@ -27,8 +25,8 @@ char *get_map_adress(char *map_name)
 	if (append_necessity == false)
 		return (map_name);
 	full_adress = NULL;
-	if (!string_appender(&full_adress, folder)
-		|| !string_appender(&full_adress, map_name))
+	if (!string_appender(&full_adress, folder) || !string_appender(&full_adress,
+			map_name))
 	{
 		end_program("Failed string_appender in get_map_adress", 1);
 	}
@@ -89,15 +87,16 @@ int	create_map(t_map *maps)
 
 int	get_file_lines(char *map_name)
 {
-	char *string;
-	int	count;
-	int	fd;
+	char	*string;
+	int		count;
+	int		fd;
 
 	if (!map_name)
 		return (0);
 	fd = open(map_name, O_RDONLY);
 	if (fd < 0)
-		return (end_program("Map not found, invalid fd in get_file_lines", 1), 0);
+		return (end_program("Map not found, invalid fd in get_file_lines", 1),
+			0);
 	count = 0;
 	string = " ";
 	while (string != NULL)
@@ -114,9 +113,9 @@ int	get_file_lines(char *map_name)
 
 int	set_map_config(t_map *maps, t_config *config, int *beginning)
 {
-	int		w_spaces;
-	int		line;
-	int		count;
+	int	w_spaces;
+	int	line;
+	int	count;
 
 	if (!maps)
 		end_program("Invalid pointer in set_map_grid", 1);
@@ -128,10 +127,11 @@ int	set_map_config(t_map *maps, t_config *config, int *beginning)
 		while (is_white_space(maps->file[line][w_spaces]))
 			w_spaces++;
 		if (!maps->file[line][w_spaces])
-			continue;
-		if(!is_config(maps->file[line] + w_spaces, config))
+			continue ;
+		if (!is_config(maps->file[line] + w_spaces, config))
 		{
-			if (count != config->count || !is_valid(maps->file[line][w_spaces], false))
+			if (count != config->count || !is_valid(maps->file[line][w_spaces],
+				false))
 				end_program("Wrong configuration in map file", 1);
 			return (*beginning = line, 1);
 		}

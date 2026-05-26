@@ -1,23 +1,22 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olacerda <olacerda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 22:17:51 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/23 11:00:19 by olacerda         ###   ########.fr       */
+/*   Updated: 2026/05/27 00:23:37 by gustoliv         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
-
+/* ************************************************************************** */
 
 #include "parse.h"
 
 int	check_map_type(char *map_name)
 {
-	int	name_size;
-	char *type;
-	int	type_size;
+	int		name_size;
+	char	*type;
+	int		type_size;
 
 	if (!map_name)
 		return (0);
@@ -29,7 +28,7 @@ int	check_map_type(char *map_name)
 	map_name += name_size - type_size;
 	if (string_compare(map_name, type, 0) == 0)
 		return (1);
-	return (0);	
+	return (0);
 }
 
 int	check_close_walls(char **map, int column_size, int line_size)
@@ -60,8 +59,10 @@ int	check_characters(t_map *maps, t_play *play)
 		column = -1;
 		while (maps->map[line][++column])
 		{
-			if ((maps->map[line][column] == 'N' || maps->map[line][column] == 'S'
-				|| maps->map[line][column] == 'E' || maps->map[line][column] == 'W'))
+			if ((maps->map[line][column] == 'N'
+				|| maps->map[line][column] == 'S'
+				|| maps->map[line][column] == 'E'
+				|| maps->map[line][column] == 'W'))
 			{
 				player_count++;
 				set_player_info(play, line, column, maps->map);
@@ -69,8 +70,8 @@ int	check_characters(t_map *maps, t_play *play)
 			if (!is_valid(maps->map[line][column], true) || (player_count > 1))
 			{
 				print_errors((char *[]){"Invalid character \"",
-					(char []){maps->map[line][column], '\0'}, "\" ", "in --> ", NULL},
-						line, column, true);
+					(char []){maps->map[line][column], '\0'}, "\" ", "in --> ",
+					NULL}, line, column, true);
 				return (0);
 			}
 		}
@@ -90,7 +91,7 @@ int	check_config_adresses(t_config *conf)
 	while (conf->ref[line])
 	{
 		if (*(conf->ref[line]) == 'F')
-			break;
+			break ;
 		if (!adress_is_valid(*(get_config_pointer(conf->ref[line], conf))))
 			return (0);
 		line++;
@@ -98,65 +99,65 @@ int	check_config_adresses(t_config *conf)
 	return (1);
 }
 
-int get_next_number(char *string, int *index, char xar)
+int	get_next_number(char *string, int *index, char xar)
 {
-    int color;
-    int count;
+	int	color;
+	int	count;
 
-    if (!string || !xar || !index)
-        return (-1);
-    color = 0;
-    count = 0;
-    while (string[*index] && string[*index] != ',')
-    {
-        if (!is_numeric(string[*index]))
-            end_program("Invalid input on RGB configuration (not numeric)", 1);
-        color = (color * 10) + (string[*index] - 48);
-        (*index)++;
-        count++;
-    }
-    if (count > 3)
-        return (-1);
-    return (color);
+	if (!string || !xar || !index)
+		return (-1);
+	color = 0;
+	count = 0;
+	while (string[*index] && string[*index] != ',')
+	{
+		if (!is_numeric(string[*index]))
+			end_program("Invalid input on RGB configuration (not numeric)", 1);
+		color = (color * 10) + (string[*index] - 48);
+		(*index)++;
+		count++;
+	}
+	if (count > 3)
+		return (-1);
+	return (color);
 }
 
-int get_element_color(char *string)
+int	get_element_color(char *string)
 {
-    int     index;
-    int     count;
-    int     color;
-    int     number;
+	int	index;
+	int	count;
+	int	color;
+	int	number;
 
-    index = 0;
-    color = 0;
-    count = -1;
-    while (++count < 3 && string[index])
-    {
-        number = get_next_number(string, &index, ',');
-        if (number < 0 || number > 255)
+	index = 0;
+	color = 0;
+	count = -1;
+	while (++count < 3 && string[index])
+	{
+		number = get_next_number(string, &index, ',');
+		if (number < 0 || number > 255)
 			end_program("Invalid number on RGB configuration", 1);
-        color += number;
-        if (string[index] == ',')
-            ++index;
-        if (count < 2)
-            color = color << RGB_BIT;
-    }
-    if (string[index] != '\0')
+		color += number;
+		if (string[index] == ',')
+			++index;
+		if (count < 2)
+			color = color << RGB_BIT;
+	}
+	if (string[index] != '\0')
 		return (end_program("Invalid configuration in RGB element", 1), -1);
-    return (color);
+	return (color);
 }
 
-int parse_and_set_rgb(t_config *config)
+int	parse_and_set_rgb(t_config *config)
 {
-    if (!config)
-        return (0);
-    config->color_f = get_element_color(config->f);
-    if (config->color_f < 0)
-        return (end_program("Invalid number on RGB element F", 1), 0);
-    config->color_c = get_element_color(config->c);
-    if (config->color_c < 0)
-        return (end_program("Invalid number on RGB element C", 1), 0);
-    return (1);
+	if (!config)
+		return (0);
+	config->color_f = get_element_color(config->f);
+	if (config->color_f < 0)
+		return (end_program("Invalid number on RGB element F", 1), 0);
+	config->color_c = get_element_color(config->c);
+	if (config->color_c < 0)
+		return (end_program("Invalid number on RGB element C", 1), 0);
+	return (1);
 }
 
 void	parse(t_all *all)
@@ -170,7 +171,7 @@ void	parse(t_all *all)
 	if (!check_map_type(all->maps->name))
 		end_program("Wrong map type. Expected 'file.cub'.", 1);
 	if (!create_map(all->maps))
-		end_program("Failed to create_map in parse", 1);		
+		end_program("Failed to create_map in parse", 1);
 	beginning = 0;
 	if (!set_map_config(all->maps, all->conf, &beginning))
 		end_program("Failed to set map_config", 1);
@@ -180,7 +181,8 @@ void	parse(t_all *all)
 		end_program("Invalid rgb format in map configuration", 1);
 	if (!set_map_grid(all->maps, all->conf, beginning))
 		end_program("Failed to set map_grip from file", 1);
-	if (!check_close_walls(all->maps->map, all->maps->columns, all->maps->lines))
+	if (!check_close_walls(all->maps->map, all->maps->columns,
+			all->maps->lines))
 		end_program("Map is not properly enclosed by walls '1'", 1);
 	if (!check_characters(all->maps, all->play))
 		end_program(NULL, 1);

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_loop.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/26 19:44:54 by gustoliv          #+#    #+#             */
+/*   Updated: 2026/05/26 19:44:54 by gustoliv         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "exec.h"
 
-int		colision(t_mlx *mlx, double p_x, double p_y)
+int	colision(t_mlx *mlx, double p_x, double p_y)
 {
 	int	x;
 	int	y;
@@ -30,38 +42,38 @@ int		colision(t_mlx *mlx, double p_x, double p_y)
 
 void	rotate_player(t_ray *ray, double angle)
 {
-	double	old_dirX;
-	double	old_planeX;
+	double	old_dirx;
+	double	old_planex;
 
-	old_dirX = ray->dirX;
-	old_planeX = ray->planeX;
-	ray->dirX = old_dirX * cos(angle) - ray->dirY * sin(angle);
-	ray->dirY = old_dirX * sin(angle) + ray->dirY * cos(angle);
-	ray->planeX = old_planeX * cos(angle) - ray->planeY * sin(angle);
-	ray->planeY = old_planeX * sin(angle) + ray->planeY * cos(angle);
+	old_dirx = ray->dirx;
+	old_planex = ray->planex;
+	ray->dirx = old_dirx * cos(angle) - ray->diry * sin(angle);
+	ray->diry = old_dirx * sin(angle) + ray->diry * cos(angle);
+	ray->planex = old_planex * cos(angle) - ray->planey * sin(angle);
+	ray->planey = old_planex * sin(angle) + ray->planey * cos(angle);
 }
 
 void	move_player(t_mlx *mlx, double speed, double x_move, double y_move)
 {
 	if ((mlx->k_d - mlx->k_a) == 1)
 	{
-		y_move += mlx->ray->dirX * speed;
-		x_move += -mlx->ray->dirY * speed;
+		y_move += mlx->ray->dirx * speed;
+		x_move += -mlx->ray->diry * speed;
 	}
 	if ((mlx->k_d - mlx->k_a) == -1)
 	{
-		y_move += -mlx->ray->dirX * speed;
-		x_move += mlx->ray->dirY * speed;
+		y_move += -mlx->ray->dirx * speed;
+		x_move += mlx->ray->diry * speed;
 	}
 	if (mlx->k_w - mlx->k_s == 1)
 	{
-		y_move += mlx->ray->dirY * speed;
-		x_move += mlx->ray->dirX * speed;
+		y_move += mlx->ray->diry * speed;
+		x_move += mlx->ray->dirx * speed;
 	}
 	if (mlx->k_w - mlx->k_s == -1)
 	{
-		y_move -= mlx->ray->dirY * speed;
-		x_move -= mlx->ray->dirX * speed;
+		y_move -= mlx->ray->diry * speed;
+		x_move -= mlx->ray->dirx * speed;
 	}
 	if (colision(mlx, x_move, y_move))
 		return ;
@@ -77,7 +89,7 @@ int	render_game(void *p)
 		return (0);
 	mlx = (t_mlx *)p;
 	put_map_in_buffer(mlx);
-	move_player(mlx, 4, mlx->x_test, mlx->y_test);
+	move_player(mlx, 3, mlx->x_test, mlx->y_test);
 	if (mlx->k_lrot == 1)
 		rotate_player(mlx->ray, -0.04);
 	if (mlx->k_rrot == 1)

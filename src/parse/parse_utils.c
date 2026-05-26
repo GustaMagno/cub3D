@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 04:55:03 by olacerda          #+#    #+#             */
-/*   Updated: 2026/05/27 00:00:14 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/05/27 00:08:50 by gustoliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	adress_is_valid(char *adress)
 {
-	int fd;
+	int	fd;
 
 	if (!adress)
 		return (0);
@@ -27,8 +27,8 @@ int	adress_is_valid(char *adress)
 
 int	is_valid(char xar, int w_spaces)
 {
-	char *valid;
-	int	index;
+	char	*valid;
+	int		index;
 
 	if (!xar)
 		return (0);
@@ -55,7 +55,8 @@ int	is_config(char *string, t_config *conf)
 	line = 0;
 	while (conf->ref[line])
 	{
-		if (string_compare(string, conf->ref[line], string_length(conf->ref[line])) == 0)
+		if (string_compare(string, conf->ref[line],
+				string_length(conf->ref[line])) == 0)
 		{
 			set_conf_content(string, conf->ref[line], conf);
 			return (1);

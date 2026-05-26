@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_structure.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 18:21:29 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/05/15 20:48:09 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/05/26 21:35:45 by gustoliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	init_structs(t_all **all)
 
 t_all	*get_all_reference(t_all *all)
 {
-	static t_all *reference;
+	static t_all	*reference;
 
-	if (all != NULL)	
+	if (all != NULL)
 	{
 		reference = all;
 		end_program(NULL, 0);

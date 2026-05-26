@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olacerda <olacerda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/20 05:57:25 by olacerda          #+#    #+#             */
-/*   Updated: 2026/04/23 10:47:27 by olacerda         ###   ########.fr       */
+/*   Created: 2026/05/27 00:20:38 by gustoliv          #+#    #+#             */
+/*   Updated: 2026/05/27 00:21:09 by gustoliv         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "parse.h"
 
@@ -38,46 +38,26 @@ int	normalize_grid(t_map *maps, int beginning)
 	int	line;
 
 	if (!maps)
-		return (0);	
+		return (0);
 	line = beginning;
 	while (maps->file[line])
 	{
 		size = string_length(maps->file[line]);
 		if (size < maps->columns)
 		{
-			maps->file[line] = re_allocker(maps->file[line], size, maps->columns + 1, sizeof(*(maps->file[line])));
-			fix_padding_n_whitespaces(maps->file[line], size, maps->columns);		
+			maps->file[line] = re_allocker(maps->file[line], size, maps->columns
+					+ 1, sizeof(*(maps->file[line])));
+			fix_padding_n_whitespaces(maps->file[line], size, maps->columns);
 		}
 		line++;
 	}
 	return (1);
 }
 
-// int	normalize_grid(t_map *maps, int beginning)
-// {
-// 	int	size;
-// 	int	line;
-
-// 	if (!maps)
-// 		return (0);	
-// 	line = beginning;
-// 	while (maps->file[line])
-// 	{
-// 		size = string_length(maps->file[line]);
-// 		if (size < maps->columns)
-// 		{
-// 			maps->file[line] = re_allocker(maps->file[line], size, maps->columns + 1, sizeof(*(maps->file[line])));
-// 			fix_padding_n_whitespaces(maps->file[line], size, maps->columns);		
-// 		}
-// 		line++;
-// 	}
-// 	return (1);
-// }
-
 int	set_conf_content(char *string, char *config_element, t_config *config)
 {
-	char **element;
-	int	index;
+	char	**element;
+	int		index;
 
 	if (!string || !config_element || !config)
 		return (0);
@@ -99,7 +79,7 @@ int	set_conf_content(char *string, char *config_element, t_config *config)
 	return (1);
 }
 
-char **get_config_pointer(char *string, t_config *config)
+char	**get_config_pointer(char *string, t_config *config)
 {
 	if (!string || !config)
 		return (NULL);

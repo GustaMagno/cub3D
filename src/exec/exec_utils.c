@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/26 19:47:33 by gustoliv          #+#    #+#             */
+/*   Updated: 2026/05/26 19:47:33 by gustoliv         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "exec.h"
 
 unsigned int	get_color(t_img *img, int x, int y)
@@ -5,7 +17,7 @@ unsigned int	get_color(t_img *img, int x, int y)
 	unsigned int	color;
 
 	color = *(unsigned int *)(img->adress + (y * img->line_len
-		+ x * (img->bits_per_pixel / 8)));
+				+ x * (img->bits_per_pixel / 8)));
 	return (color);
 }
 
@@ -27,10 +39,9 @@ void	put_pixel(t_mlx *mlx, int x, int y, unsigned int color)
 	char	*adress;
 
 	adress = mlx->screen_img->adress + (y * mlx->screen_img->line_len
-		+ x * (mlx->screen_img->bits_per_pixel / 8));
+			+ x * (mlx->screen_img->bits_per_pixel / 8));
 	*(unsigned int *)adress = color;
 }
-
 
 t_img	*wall_img(t_mlx *mlx)
 {
@@ -39,22 +50,21 @@ t_img	*wall_img(t_mlx *mlx)
 		if (mlx->ray->step_x > 0)
 			return (mlx->ea);
 		else
-			return(mlx->we);
+			return (mlx->we);
 	}
 	if (mlx->ray->step_y > 0)
 		return (mlx->so);
 	return (mlx->no);
-	
 }
 
-void	dda_step_assign(t_mlx *mlx, t_ray *ray, double rayDirX, double rayDirY)
+void	dda_step_assign(t_mlx *mlx, t_ray *ray, double raydirx, double raydiry)
 {
-	double pos_x;
-	double pos_y;
+	double	pos_x;
+	double	pos_y;
 
 	pos_x = mlx->x_test / 64.0;
 	pos_y = mlx->y_test / 64.0;
-	if (rayDirX < 0)
+	if (raydirx < 0)
 	{
 		ray->step_x = -1;
 		ray->side_dist_x = (pos_x - ray->map_x) * ray->delta_dist_x;
@@ -64,7 +74,7 @@ void	dda_step_assign(t_mlx *mlx, t_ray *ray, double rayDirX, double rayDirY)
 		ray->step_x = 1;
 		ray->side_dist_x = (ray->map_x + 1 - pos_x) * ray->delta_dist_x;
 	}
-	if (rayDirY < 0)
+	if (raydiry < 0)
 	{
 		ray->step_y = -1;
 		ray->side_dist_y = (pos_y - ray->map_y) * ray->delta_dist_y;
