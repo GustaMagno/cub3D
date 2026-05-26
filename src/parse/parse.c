@@ -34,26 +34,14 @@ int	check_map_type(char *map_name)
 
 int	check_close_walls(char **map, int column_size, int line_size)
 {
-	// int	line;
-	// int	column;
-
 	if (!map)
 		return (0);
-	printf("oie ---------->1\n");
 	if (!closed_ends(map, column_size, line_size))
 		return (0);
-	printf("oie ---------->2\n");
 	if (!check_lines(map))
 		return (0);
-	printf("oie ---------->3\n");
-	if (!check_columns(map, column_size))
+	if (!check_columns(map))
 		return (0);
-	// if (!check_axis(map, &line, &column, &line))
-	// 	return (0);
-	// printf("oie ---------->3\n");
-	// if (!check_axis(map, &line, &column, &column))
-	// 	return (0);
-	printf("oie ---------->4\n");
 	return (1);
 }
 
@@ -171,92 +159,6 @@ int parse_and_set_rgb(t_config *config)
     return (1);
 }
 
-int	next_index_non_whitespace(char *string, int *index, int pre_increment)
-{
-	if (!string || !index)
-		end_program("Invalid pointer in function 'next_non_whitespace'", 1);
-	*index = 0;
-	while(is_white_space(string[*index]))
-		(*index)++;
-	if (pre_increment == true)
-		(*index)--;
-	return (1);
-}
-
-int	last_index_non_whitespace(char *string, int *index)
-{
-	if (!string || !index)
-		return (0);
-	*index = string_length(string) - 1;
-	while (*index > 0 && is_white_space(string[*index]))
-		(*index)--;
-	return (1);
-}
-
-int	next_line_non_whitespace(char **map, int column, int *line, int pre_increment)
-{
-	if (!map || !line)
-		return (0);
-	(*line) = 0;
-	while (map[*line] && is_white_space(map[*line][column]))
-		(*line)++;
-	if (pre_increment == true)
-		(*line)--;
-	return (1);
-}
-
-int	last_line_non_whitespace(char **map, int column, int *line, int line_size)
-{
-	if (!map || !line)
-		return (0);
-	(*line) = line_size - 1;
-	// printf("-----------------\n\nline_size: %d\n", line_size - 1);
-	while (*line > 0 && is_white_space(map[*line][column]))
-		(*line)--;
-	// printf("line: %d-----------\n\n\n", *line);
-	return (1);
-}
-
-int	closed_ends(char **map, int column_size, int line_size)
-{
-	int	end;
-	int	beginning;
-	int	line;
-	int	index;
-
-	if (!map)
-		return (0);
-	line = 0;
-	while (map[line])
-	{
-		next_index_non_whitespace(map[line], &beginning, false);
-		// printf("aqui1\n");
-		last_index_non_whitespace(map[line], &end);
-		// printf("aqui2\n");
-		if (map[line][beginning] != '1' || map[line][end] != '1')
-		{
-			printf("FIRST\nline: %d beginning: %d   end: %d\n\n", line, beginning, end);
-			printf("char start: %c\nchar end: %c\n\n", map[line][beginning], map[line][end]);
-			return (0);
-		}
-		line++;
-	}
-	index = -1;
-	while (++index < column_size)
-	{
-		next_line_non_whitespace(map, index, &beginning, false);
-		last_line_non_whitespace(map, index, &end, line_size);
-		if (map[beginning][index] != '1' || map[end][index] != '1')
-		{
-			printf("SECOND\nbeginning: %d   end: %d   index: %d\n", beginning, end, index);
-			printf("char start: %c\nchar end: %c\n\n", map[beginning][index], map[end][index]);
-			return (0);
-		}
-		index++;
-	}
-	return (1);
-}
-
 void	parse(t_all *all)
 {
 	int	beginning;
@@ -278,7 +180,6 @@ void	parse(t_all *all)
 		end_program("Invalid rgb format in map configuration", 1);
 	if (!set_map_grid(all->maps, all->conf, beginning))
 		end_program("Failed to set map_grip from file", 1);
-	// normalize_grid(all->maps, 0);
 	if (!check_close_walls(all->maps->map, all->maps->columns, all->maps->lines))
 		end_program("Map is not properly enclosed by walls '1'", 1);
 	if (!check_characters(all->maps, all->play))

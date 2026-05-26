@@ -74,7 +74,7 @@ int	normalize_grid(t_map *maps, int beginning)
 // 	return (1);
 // }
 
-int	set_config_content(char *string, char *config_element, t_config *config)
+int	set_conf_content(char *string, char *config_element, t_config *config)
 {
 	char **element;
 	int	index;
@@ -91,7 +91,7 @@ int	set_config_content(char *string, char *config_element, t_config *config)
 		end_program("Repeated identifier in map configuration", 1);
 	(*element) = malloc((string_length(string) + 1) * sizeof(char));
 	if (!(*element))
-		end_program("Failed allocation in set_config_content", 1);
+		end_program("Failed allocation in set_conf_content", 1);
 	index = -1;
 	while (string[++index])
 		(*element)[index] = string[index];

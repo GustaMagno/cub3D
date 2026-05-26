@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                          :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/13 20:01:16 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/14 21:57:32 by otlacerd         ###   ########.fr       */
+/*   Created: 2026/05/27 00:01:35 by otlacerd          #+#    #+#             */
+/*   Updated: 2026/05/27 00:01:35 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,48 +17,51 @@
 //=====- parse.c -==============================================================
 void	parse(t_all *all); //Do the whole parse of the project
 int     check_map_type(char *map_name); //Verify if the map_file end with '.cub'
-int     check_close_walls(char **map, int column_size, int line_size); //Verify if the map is surrounded by '1'
+int     check_close_walls(char **map, int column_size, int line_size); //Verify
 int		check_characters(t_map *maps, t_play *play); //Verify all characters.
 int     check_config_adresses(t_config *conf); //Verify all config adresses
 int		parse_and_set_rgb(t_config *config);
 int		get_element_color(char *string);
 int		get_next_number(char *string, int *index, char xar);
+
+//====- closed_walls.c -========================================================
 int		closed_ends(char **map, int column_size, int line_size);
-int		next_index_non_whitespace(char *string, int *index, int pre_increment); // Sets 'index' to represent the next non-whitespace character
-int		next_line_non_whitespace(char **map, int column, int *line, int pre_increment);
-int		last_index_non_whitespace(char *string, int *index);
-
-//=====- parse_utils.c -========================================================
-int     adress_is_valid(char *adress); //Check if open(adress) returns a valid FD.
-int     is_valid(char xar, int w_spaces); //Check if 'xar' is allowed on the map. Set 'w_spaces' true to include white spaces.
-int		is_config(char *string, t_config *conf); // Verify if the 'string' argument is a configuration of the chosen map file
-int     check_axis(char **map, int *line, int *column, int *axis); //Check if an specific axis set by "*axis", begin all parts of the map with '1', and end with '1'.
-
-int		check_columns(char **map, int column_size);
+int		check_columns(char **map);
 int		check_lines(char **map);
 
-int		set_player_info(t_play *player, int line, int column, char **map); //Set direction, line and column of the player.
+//====- closed_walls_utils.c -=================================================
+int		next_index_non_whitespace(char *string, int *index, int pre_increment); 
+int		next_ln_non_whitespace(char **map, int column, int *line, int pre_inc);
+int		last_index_non_whitespace(char *string, int *index);
+int		last_ln_non_wtspace(char **map, int column, int *line, int line_size);
 
-//=====- map_utils.c -==================================================
-int     normalize_grid(t_map *maps, int beginning); // Make all lines have the same size. (Same as the biggest one).
-int		set_config_content(char *string, char *config_element, t_config *config); //Saves the content of an specific configuration "string".
-char	**get_config_pointer(char *string, t_config *config); //Return the adress of an specific configuration pointer "string".
-int     trim_map_tail(char **map); //Cut white_spaces at the end of all lines in map.
-int     fix_padding_n_whitespaces(char *string, int size, int column_size); //Switch all white_spaces for 'space', and add spaces to smaller lines in order to be equal as the biggest one.
-int		get_grid_columns(char **map, int beginning); // Count the size of the biggest string.
+//=====- parse_utils.c -=======================================================
+int     adress_is_valid(char *adress);
+int     is_valid(char xar, int w_spaces);
+int		is_config(char *string, t_config *conf);
+int     check_axis(char **map, int *line, int *column, int *axis);
+int		set_player_info(t_play *player, int line, int column, char **map);
 
-//=====- map.c -=====================================================
-int		create_map(t_map *maps); //Converts the whole 'chosen_file' to a char **
-int		set_map_config(t_map *maps, t_config *conf, int *beginning); //Returns -1 when fails. Get the beginning of the 'map_grid' in raw_map
-int		set_map_grid(t_map *maps, t_config *conf, int beginning);// Gets the 'grid_map' compoused by '0's '1's inside the chosen map file
-int		get_file_lines(char *map_name); //Return line count of the map
-char	*get_map_adress(char *map_name); //Gets struct 'all' adress from any place
+//=====- map_utils.c -=================================================
+int     normalize_grid(t_map *maps, int beginning);
+int		set_conf_content(char *string, char *config_element, t_config *config);
+char	**get_config_pointer(char *string, t_config *config);
+int     trim_map_tail(char **map);
+int     fix_padding_n_whitespaces(char *string, int size, int column_size);
+int		get_grid_columns(char **map, int beginning); // Count the size of the bi
 
-//=====- data_structure.c -===============================================================
-void	init_structs(t_all **all);//Mallocs and sets '0' all structs of the project
+//=====- map.c -====================================================
+int		create_map(t_map *maps);
+int		set_map_config(t_map *maps, t_config *conf, int *beginning);
+int		set_map_grid(t_map *maps, t_config *conf, int beginning);
+int		get_file_lines(char *map_name);
+char	*get_map_adress(char *map_name);
+
+//=====- data_structure.c -=====================================================
+void	init_structs(t_all **all);
 int		create_all_images(t_mlx *mlx, t_config *conf);
-t_all	*get_all_reference(t_all *all);//Returns 'all' adress when arg is NULL
-int		fill_structs(t_all *all, int argc, char **argv, t_mlx *mlx);//Used at beginning of main
-int		fill_config(t_config *conf); //Initialize struct 'config' variables.
+t_all	*get_all_reference(t_all *all);
+int		fill_structs(t_all *all, int argc, char **argv, t_mlx *mlx);
+int		fill_config(t_config *conf);
 
 #endif

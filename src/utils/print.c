@@ -6,7 +6,7 @@
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:20:12 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/04/21 07:17:14 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/05/26 23:48:26 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,24 +74,6 @@ int	print_errors(char **messages, int line, int column, int coordinates)
 		print_number(column);
 	}
 	write(1, "\n", 1);
-	return (1);
-}
-
-int	map_debugger(char **map, char *message)
-{
-	int	line;
-	
-	if (!map || !message)
-		return (0);
-	line = 0;	
-	printf("%s\n", message);
-	while (map[line])
-	{
-		printf("maps[%d]: %s\n",line, map[line]);
-		line++;
-	}
-	if (map[line] == NULL)
-		printf("maps[%d] is NULL\n", line);
 	return (1);
 }
 

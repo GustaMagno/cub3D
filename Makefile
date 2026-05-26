@@ -20,6 +20,8 @@ INCLUDES = -I. -I./includes -I$(MLX_DIR)
 all: $(NAME)
 
 SRCS = cub3D.c \
+		src/parse/closed_walls_utils.c \
+		src/parse/closed_walls.c \
 		src/parse/data_structure.c \
 		src/parse/parse.c \
 		src/parse/parse_utils.c \
