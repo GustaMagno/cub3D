@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   closed_walls_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 23:52:21 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/05/26 23:59:35 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/05/27 00:24:28 by gustoliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	next_index_non_whitespace(char *string, int *index, int pre_increment)
 	if (!string || !index)
 		end_program("Invalid pointer in function 'next_non_whitespace'", 1);
 	*index = 0;
-	while(is_white_space(string[*index]))
+	while (is_white_space(string[*index]))
 		(*index)++;
 	if (pre_increment == true)
 		(*index)--;

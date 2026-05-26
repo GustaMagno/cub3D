@@ -6,7 +6,7 @@
 /*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 21:44:42 by gustoliv          #+#    #+#             */
-/*   Updated: 2026/05/26 22:06:02 by gustoliv         ###   ########.fr       */
+/*   Updated: 2026/05/27 00:26:09 by gustoliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define UTILS_H
 
 # include "cub3D.h"
-
 
 void	*re_allocker(void *ptr, t_ul size, t_ul new_size, t_ul type_sz);
 char	*string_duplicate(char *string);
