@@ -6,7 +6,7 @@
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 23:49:27 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/05/26 23:59:35 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/05/27 00:35:06 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,44 @@ int	closed_ends(char **map, int column_size, int line_size)
 		if (map[beginning][index] != '1' || map[end][index] != '1')
 			return (0);
 	}
+	return (1);
+}
+
+int	trim_map_tail(char **map)
+{
+	int	line;
+	int	index;
+
+	if (!map)
+		return (0);
+	line = 0;
+	while (map[line])
+	{
+		index = string_length(map[line]);
+		while ((index > 0) && is_white_space(map[line][index - 1]))
+		{
+			map[line][index - 1] = '\0';
+			index--;
+		}
+		line++;
+	}
+	return (1);
+}
+
+int	fix_padding_n_whitespaces(char *string, int size, int column_size)
+{
+	int	index;
+
+	if (!string)
+		return (0);
+	index = 0;
+	while (((size > 0) && (index < size)) || string[index])
+	{
+		if (is_white_space(string[index]))
+			string[index] = ' ';
+		index++;
+	}
+	while (index < column_size)
+		string[index++] = ' ';
 	return (1);
 }

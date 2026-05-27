@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 22:17:51 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/05/27 00:23:37 by gustoliv         ###   ########.fr       */
+/*   Updated: 2026/05/27 00:41:34 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,32 +48,22 @@ int	check_characters(t_map *maps, t_play *play)
 {
 	int	player_count;
 	int	line;
-	int	column;
+	int	col;
 
-	if (!maps)
-		return (0);
 	player_count = 0;
 	line = -1;
 	while (maps->map[++line])
 	{
-		column = -1;
-		while (maps->map[line][++column])
+		col = -1;
+		while (maps->map[line][++col])
 		{
-			if ((maps->map[line][column] == 'N'
-				|| maps->map[line][column] == 'S'
-				|| maps->map[line][column] == 'E'
-				|| maps->map[line][column] == 'W'))
-			{
-				player_count++;
-				set_player_info(play, line, column, maps->map);
-			}
-			if (!is_valid(maps->map[line][column], true) || (player_count > 1))
-			{
-				print_errors((char *[]){"Invalid character \"",
-					(char []){maps->map[line][column], '\0'}, "\" ", "in --> ",
-					NULL}, line, column, true);
-				return (0);
-			}
+			if ((maps->map[line][col] == 'N' || maps->map[line][col] == 'S'
+				|| maps->map[line][col] == 'E' || maps->map[line][col] == 'W'))
+				(++player_count) && set_player_info(play, line, col, maps->map);
+			if (!is_valid(maps->map[line][col], true) || (player_count > 1))
+				return (print_errors((char *[]){"Invalid character \"",
+						(char []){maps->map[line][col], '\0'}, "\" ", "in --> ",
+						NULL}, line, col, true), 0);
 		}
 	}
 	if (player_count < 1)
@@ -96,67 +86,6 @@ int	check_config_adresses(t_config *conf)
 			return (0);
 		line++;
 	}
-	return (1);
-}
-
-int	get_next_number(char *string, int *index, char xar)
-{
-	int	color;
-	int	count;
-
-	if (!string || !xar || !index)
-		return (-1);
-	color = 0;
-	count = 0;
-	while (string[*index] && string[*index] != ',')
-	{
-		if (!is_numeric(string[*index]))
-			end_program("Invalid input on RGB configuration (not numeric)", 1);
-		color = (color * 10) + (string[*index] - 48);
-		(*index)++;
-		count++;
-	}
-	if (count > 3)
-		return (-1);
-	return (color);
-}
-
-int	get_element_color(char *string)
-{
-	int	index;
-	int	count;
-	int	color;
-	int	number;
-
-	index = 0;
-	color = 0;
-	count = -1;
-	while (++count < 3 && string[index])
-	{
-		number = get_next_number(string, &index, ',');
-		if (number < 0 || number > 255)
-			end_program("Invalid number on RGB configuration", 1);
-		color += number;
-		if (string[index] == ',')
-			++index;
-		if (count < 2)
-			color = color << RGB_BIT;
-	}
-	if (string[index] != '\0')
-		return (end_program("Invalid configuration in RGB element", 1), -1);
-	return (color);
-}
-
-int	parse_and_set_rgb(t_config *config)
-{
-	if (!config)
-		return (0);
-	config->color_f = get_element_color(config->f);
-	if (config->color_f < 0)
-		return (end_program("Invalid number on RGB element F", 1), 0);
-	config->color_c = get_element_color(config->c);
-	if (config->color_c < 0)
-		return (end_program("Invalid number on RGB element C", 1), 0);
 	return (1);
 }
 

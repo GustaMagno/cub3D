@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rgb.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 00:23:53 by gustoliv          #+#    #+#             */
-/*   Updated: 2026/05/27 00:24:04 by gustoliv         ###   ########.fr       */
+/*   Updated: 2026/05/27 00:42:11 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "parse.h"
 
 int	get_next_number(char *string, int *index, char xar)
 {
@@ -22,8 +24,7 @@ int	get_next_number(char *string, int *index, char xar)
 	while (string[*index] && string[*index] != ',')
 	{
 		if (!is_numeric(string[*index]))
-			return (-1);
-		printf("index: %d    string[index] == %c\n", *index, string[*index]);
+			end_program("Invalid input on RGB configuration (not numeric)", 1);
 		color = (color * 10) + (string[*index] - 48);
 		(*index)++;
 		count++;
@@ -42,24 +43,20 @@ int	get_element_color(char *string)
 
 	index = 0;
 	color = 0;
-	count = 0;
+	count = -1;
 	while (++count < 3 && string[index])
 	{
 		number = get_next_number(string, &index, ',');
-		if (number < 0)
+		if (number < 0 || number > 255)
 			end_program("Invalid number on RGB configuration", 1);
 		color += number;
 		if (string[index] == ',')
 			++index;
-		if (count < 3)
+		if (count < 2)
 			color = color << RGB_BIT;
 	}
-	printf("color: %d\n", color);
 	if (string[index] != '\0')
-	{
-		printf("string[index] == %c\n", string[index]);
 		return (end_program("Invalid configuration in RGB element", 1), -1);
-	}
 	return (color);
 }
 

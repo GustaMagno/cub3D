@@ -3,7 +3,7 @@ ARG = map.cub
 
 CC = cc
 GCC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 -O0
+CFLAGS = -Wall -Wextra -Werror #-O3
 GFLAGS = -Wall -Wextra -Werror -g3 -O0
 VALGRIND = valgrind \
 			--leak-check=full \
@@ -22,6 +22,7 @@ all: $(NAME)
 SRCS = cub3D.c \
 		src/parse/closed_walls_utils.c \
 		src/parse/closed_walls.c \
+		src/parse/parse_rgb.c \
 		src/parse/data_structure.c \
 		src/parse/parse.c \
 		src/parse/parse_utils.c \
