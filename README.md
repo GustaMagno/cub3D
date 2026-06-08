@@ -49,4 +49,3 @@ make
 Artificial Intelligence (Large Language Models) was actively utilized as a collaborative peer-programming tool during this project's development. Here is how it was applied:
 1. **Mathematical Simplification & Geometry:** AI helped reverse-engineer and break down the vector normalization behind `delta_dist_x = fabs(1.0 / rayDirX)` using similar triangle geometry theorems. It was also used to visually map how `delta_dist` works as a dynamic step scale for DDA.
 2. **Algorithm Architecture:** Collaborated with AI to conceptually contrast native pixel-by-pixel ray increments versus DDA grid boundary jumps, validating the core rendering performance choices.
-3. **Configuration Debugging:** Assisted in debugging configuration files (`settings.json`) to enforce Unix LF line endings and proper tabulations (`\t`) required by the 42 Norminette standard, preventing automated formatter formatting bugs.
