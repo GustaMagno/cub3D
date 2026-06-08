@@ -6,27 +6,25 @@
 /*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 22:17:51 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/05/27 00:41:34 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/06/08 17:47:41 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-int	check_map_type(char *map_name)
+int	check_type(char *name, char *type)
 {
 	int		name_size;
-	char	*type;
 	int		type_size;
 
-	if (!map_name)
+	if (!name || !type)
 		return (0);
-	type = MAP_TYPE;
 	type_size = string_length(type);
-	name_size = string_length(map_name);
+	name_size = string_length(name);
 	if (name_size <= type_size)
 		return (0);
-	map_name += name_size - type_size;
-	if (string_compare(map_name, type, 0) == 0)
+	name += name_size - type_size;
+	if (string_compare(name, type, 0) == 0)
 		return (1);
 	return (0);
 }
@@ -82,7 +80,9 @@ int	check_config_adresses(t_config *conf)
 	{
 		if (*(conf->ref[line]) == 'F')
 			break ;
-		if (!adress_is_valid(*(get_config_pointer(conf->ref[line], conf))))
+		if (!check_type(*get_config_pointer(conf->ref[line], conf), IMAGE_TYPE))
+			end_program("Invalid format for the image (should be 'xpm')", 1);
+		if (!adress_is_valid(*get_config_pointer(conf->ref[line], conf)))
 			return (0);
 		line++;
 	}
@@ -97,7 +97,7 @@ void	parse(t_all *all)
 		end_program("Invalid pointer in function: parse", 1);
 	if (all->argc != 2)
 		end_program("Wrong argument count", 1);
-	if (!check_map_type(all->maps->name))
+	if (!check_type(all->maps->name, MAP_TYPE))
 		end_program("Wrong map type. Expected 'file.cub'.", 1);
 	if (!create_map(all->maps))
 		end_program("Failed to create_map in parse", 1);

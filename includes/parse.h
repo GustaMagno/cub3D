@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 00:18:12 by gustoliv          #+#    #+#             */
-/*   Updated: 2026/05/27 00:26:25 by gustoliv         ###   ########.fr       */
+/*   Updated: 2026/06/08 17:24:54 by otlacerd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include "utils.h"
 
 void	parse(t_all *all);
-int		check_map_type(char *map_name);
+int		check_type(char *name, char *type);
 int		closed_ends(char **map, int column_size, int line_size);
 int		check_lines(char **map);
 int		check_columns(char **map);

@@ -30,6 +30,7 @@
 # define SUBJECT_ERROR "Error\n"
 # define MAPS_FOLDER "assets/maps/"
 # define MAP_TYPE ".cub"
+# define IMAGE_TYPE ".xpm"
 # define VALID_CHARACTERS "01NSEW"
 # define VALID_CHARACTERS_W_SPACE "01NSEW 	"
 
