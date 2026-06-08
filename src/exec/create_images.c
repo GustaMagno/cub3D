@@ -6,7 +6,7 @@
 /*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 19:54:30 by gustoliv          #+#    #+#             */
-/*   Updated: 2026/05/27 00:06:15 by gustoliv         ###   ########.fr       */
+/*   Updated: 2026/06/08 16:11:10 by gustoliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_img	*new_file_img(void *mlx, char *adress)
 	img->adress = mlx_get_data_addr(img->img, &img->bits_per_pixel,
 			&img->line_len, &img->endian);
 	if (!img->adress)
-		return (free(img), mlx_destroy_image(mlx, img->img), NULL);
+		return (mlx_destroy_image(mlx, img->img), free(img), NULL);
 	return (img);
 }
 
