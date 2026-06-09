@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olacerda <olacerda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 22:17:51 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/06/08 17:47:41 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/06/09 18:41:55 by olacerda         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "parse.h"
 
@@ -29,11 +29,9 @@ int	check_type(char *name, char *type)
 	return (0);
 }
 
-int	check_close_walls(char **map, int column_size, int line_size)
+int	check_close_walls(char **map)
 {
 	if (!map)
-		return (0);
-	if (!closed_ends(map, column_size, line_size))
 		return (0);
 	if (!check_lines(map))
 		return (0);
@@ -57,7 +55,7 @@ int	check_characters(t_map *maps, t_play *play)
 		{
 			if ((maps->map[line][col] == 'N' || maps->map[line][col] == 'S'
 				|| maps->map[line][col] == 'E' || maps->map[line][col] == 'W'))
-				(++player_count) && set_player_info(play, line, col, maps->map);
+				(void)((++player_count) && set_player_info(play, line, col, maps->map));
 			if (!is_valid(maps->map[line][col], true) || (player_count > 1))
 				return (print_errors((char *[]){"Invalid character \"",
 						(char []){maps->map[line][col], '\0'}, "\" ", "in --> ",
@@ -72,6 +70,7 @@ int	check_characters(t_map *maps, t_play *play)
 int	check_config_adresses(t_config *conf)
 {
 	int	line;
+	char *pointer;
 
 	if (!conf)
 		return (0);
@@ -80,9 +79,10 @@ int	check_config_adresses(t_config *conf)
 	{
 		if (*(conf->ref[line]) == 'F')
 			break ;
-		if (!check_type(*get_config_pointer(conf->ref[line], conf), IMAGE_TYPE))
+		pointer = *get_config_pointer(conf->ref[line], conf);
+		if (!check_type(pointer, IMAGE_TYPE))
 			end_program("Invalid format for the image (should be 'xpm')", 1);
-		if (!adress_is_valid(*get_config_pointer(conf->ref[line], conf)))
+		if (!adress_is_valid(pointer))
 			return (0);
 		line++;
 	}
@@ -110,9 +110,8 @@ void	parse(t_all *all)
 		end_program("Invalid rgb format in map configuration", 1);
 	if (!set_map_grid(all->maps, all->conf, beginning))
 		end_program("Failed to set map_grip from file", 1);
-	if (!check_close_walls(all->maps->map, all->maps->columns,
-			all->maps->lines))
-		end_program("Map is not properly enclosed by walls '1'", 1);
 	if (!check_characters(all->maps, all->play))
 		end_program(NULL, 1);
+	if (!check_close_walls(all->maps->map))
+		end_program("Map is not properly enclosed by walls '1'", 1);
 }

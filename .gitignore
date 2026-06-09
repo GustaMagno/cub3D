@@ -1,4 +1,8 @@
 .o
+*.o
 build
 external
 cub3D
+.vscode
+minilibx-linux
+a.out

@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   closed_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olacerda <olacerda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 23:49:27 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/05/27 00:35:06 by otlacerd         ###   ########.fr       */
+/*   Updated: 2026/06/09 13:17:07 by olacerda         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "parse.h"
 
@@ -66,35 +66,6 @@ int	check_columns(char **map)
 			line++;
 		}
 		line = 0;
-	}
-	return (1);
-}
-
-int	closed_ends(char **map, int column_size, int line_size)
-{
-	int	end;
-	int	beginning;
-	int	line;
-	int	index;
-
-	if (!map)
-		return (0);
-	line = 0;
-	while (map[line])
-	{
-		next_index_non_whitespace(map[line], &beginning, false);
-		last_index_non_whitespace(map[line], &end);
-		if (map[line][beginning] != '1' || map[line][end] != '1')
-			return (0);
-		line++;
-	}
-	index = -1;
-	while (++index < column_size)
-	{
-		next_ln_non_whitespace(map, index, &beginning, false);
-		last_ln_non_wtspace(map, index, &end, line_size);
-		if (map[beginning][index] != '1' || map[end][index] != '1')
-			return (0);
 	}
 	return (1);
 }

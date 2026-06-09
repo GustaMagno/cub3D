@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olacerda <olacerda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 21:44:42 by gustoliv          #+#    #+#             */
-/*   Updated: 2026/05/27 00:26:09 by gustoliv         ###   ########.fr       */
+/*   Updated: 2026/06/09 15:24:03 by olacerda         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef UTILS_H
 # define UTILS_H
@@ -35,7 +35,6 @@ char	*liner(char *line, t_gnl *x, int *all_end, char *buffer);
 int		print_message(char *message, int fd, int break_line);
 int		print_errors(char **messages, int line, int column, int coordinates);
 int		print_error(char *message);
-int		map_debugger(char **map, char *message);
 void	print_number(int number);
 
 void	end_program(char *error_message, int status);

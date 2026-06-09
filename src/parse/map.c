@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gustoliv <gustoliv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olacerda <olacerda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 20:26:32 by gustoliv          #+#    #+#             */
-/*   Updated: 2026/05/27 00:25:18 by gustoliv         ###   ########.fr       */
+/*   Updated: 2026/06/09 18:34:49 by olacerda         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "parse.h"
 
@@ -50,6 +50,8 @@ int	set_map_grid(t_map *maps, t_config *conf, int beginning)
 	while (maps->file[beginning] && (line < (maps->lines + 1)))
 	{
 		maps->map[line] = maps->file[beginning];
+		if (!is_valid(*maps->map[line], false))
+			end_program("Invalid line in map-grid", 1);
 		line++;
 		beginning++;
 	}

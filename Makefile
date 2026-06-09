@@ -20,7 +20,6 @@ INCLUDES = -I. -I./includes -I$(MLX_DIR)
 all: $(NAME)
 
 SRCS = cub3D.c \
-		src/parse/closed_walls_utils.c \
 		src/parse/closed_walls.c \
 		src/parse/parse_rgb.c \
 		src/parse/data_structure.c \
@@ -81,6 +80,8 @@ fclean: clean
 	@rm -Rf $(BUILD_DIR)
 	@rm -Rf $(MLX_DIR)
 	@rm -Rf $(LIBFT_DIR)
+	@rm -Rf ./includes/mlx.h
+	@rm -Rf minilibx-linux
 
 re: fclean mlx libft all
 
