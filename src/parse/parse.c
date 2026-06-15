@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olacerda <olacerda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: otlacerd <otlacerd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 22:17:51 by otlacerd          #+#    #+#             */
-/*   Updated: 2026/06/09 18:41:55 by olacerda         ###   ########.fr       */
+/*   Created: 2026/06/15 17:40:05 by otlacerd          #+#    #+#             */
+/*   Updated: 2026/06/15 17:42:19 by otlacerd         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "parse.h"
 
@@ -55,7 +55,7 @@ int	check_characters(t_map *maps, t_play *play)
 		{
 			if ((maps->map[line][col] == 'N' || maps->map[line][col] == 'S'
 				|| maps->map[line][col] == 'E' || maps->map[line][col] == 'W'))
-				(void)((++player_count) && set_player_info(play, line, col, maps->map));
+				++player_count && set_player_info(play, line, col, maps->map);
 			if (!is_valid(maps->map[line][col], true) || (player_count > 1))
 				return (print_errors((char *[]){"Invalid character \"",
 						(char []){maps->map[line][col], '\0'}, "\" ", "in --> ",
@@ -69,8 +69,8 @@ int	check_characters(t_map *maps, t_play *play)
 
 int	check_config_adresses(t_config *conf)
 {
-	int	line;
-	char *pointer;
+	int		line;
+	char	*pointer;
 
 	if (!conf)
 		return (0);
